@@ -9,7 +9,7 @@ function photographerFactory(data) {
       const img = document.createElement('img');
       img.setAttribute('src', picture);
       const h2 = document.createElement('h2');
-      h2.textContent = name;
+      h2.textContent = `${name}`;
       const p1 = document.createElement('p');
       p1.textContent = `ID: ${id}`;
       const p2 = document.createElement('p');
@@ -26,7 +26,7 @@ function photographerFactory(data) {
       article.appendChild(p4);
       return article;
     }
-    return { name, picture, id, city, country, tagline, price, getUserCardDOM };
+    return { name, picture, id, city, country, tagline, price, getUserCardDOM }
   }
 
 

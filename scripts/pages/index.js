@@ -1,79 +1,33 @@
-    //async function getPhotographers() {
-        // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet, 
-        // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
 
-
-
-
-
+async function getPhotographer(id) {
+  try {
+    const response = await fetch("http://127.0.0.1:5501/data/photographers.json");
+    const data = await response.json();
+    const photographer = data.photographers.find(p => p.id === id);
+    const photographerObject = photographerFactory(photographer);
+    const photographerElement = photographerObject.getUserCardDOM();
+    document.body.appendChild(photographerElement);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 async function getPhotographers() {
-    let photographers = [];
-    try {
-      const response = await fetch('http://127.0.0.1:5501/data/photographers.json');
-      const data = await response.json();
-      for (const key in data) {
-        const photographer = photographerFactory(data[key]);
-        photographers.push(photographer);
-      }
-      photographers.forEach(photographer => {
-        const userCard = photographer.getUserCardDOM();
-        document.body.appendChild(userCard);
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  try {
+    const response = await fetch("http://127.0.0.1:5501/data/photographers.json");
+    const data = await response.json();
+    data.photographers.forEach(photographer => {
+      getPhotographer(photographer.id);
+    });
+  } catch (error) {
+    console.error(error);
   }
-  
-  getPhotographers();
-  
-  
+}
+
+getPhotographers(); // Affiche tous les photographes dans le DOM
 
 
 
 
-    //CODE OPENCLASSROOM
-    
-        //     let photographers = [
-    //         {
-    //             "name": "Ma data test",
-    //             "id": 1,
-    //             "city": "Paris",
-    //             "country": "France",
-    //             "tagline": "Ceci est ma data test",
-    //             "price": 400,
-    //             "portrait": "account.png"
-    //         },
-    //         {
-    //             "name": "Autre data test",
-    //             "id": 2,
-    //             "city": "Londres",
-    //             "country": "UK",
-    //             "tagline": "Ceci est ma data test 2",
-    //             "price": 500,
-    //             "portrait": "account.png"
-    //         },
-    //     ]
-    //     // et bien retourner le tableau photographers seulement une fois récupéré
-    //     return ({
-    //         photographers: [...photographers, ...photographers, ...photographers]})
-    // }
 
-    // async function displayData(photographers) {
-    //     const photographersSection = document.querySelector(".photographer_section");
 
-    //     photographers.forEach((photographer) => {
-    //         const photographerModel = photographerFactory(photographer);
-    //         const userCardDOM = photographerModel.getUserCardDOM();
-    //         photographersSection.appendChild(userCardDOM);
-    //     });
-    // };
-
-    // async function init() {
-    //     // Récupère les datas des photographes
-    //     const { photographers } = await getPhotographers();
-    //     displayData(photographers);
-    // };
-    
-    // init();
-    
