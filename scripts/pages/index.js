@@ -3,10 +3,20 @@ async function getPhotographer(id) {
   try {
     const response = await fetch("http://127.0.0.1:5501/data/photographers.json");
     const data = await response.json();
-    const photographer = data.photographers.find(p => p.id === id);
-    const photographerObject = photographerFactory(photographer);
-    const photographerElement = photographerObject.getUserCardDOM();
-    document.body.appendChild(photographerElement);
+    const photographer = data.photographers.find(photographer => photographer.id === id);
+    //FONCTION CLASSIQUE
+    // const photographer = data.photographers.find(function(photographer) {
+    //   if (photographer.id === id) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }});
+    const photographerDetail = photographerFactory(photographer);
+    const photographerElement = photographerDetail.getUserCardDOM();
+    // Ajout de l'élément au conteneur dans l'élément main
+    const main = document.getElementById('main');
+    const photographerSection = main.querySelector('.photographer_section');
+    photographerSection.appendChild(photographerElement);
   } catch (error) {
     console.error(error);
   }
