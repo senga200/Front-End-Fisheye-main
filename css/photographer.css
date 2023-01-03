@@ -8,6 +8,9 @@
     height: 300px;
     margin: 0 100px;
 }
+img{
+    width: 50%;
+}
 
 .contact_button {
     border: dashed salmon;
