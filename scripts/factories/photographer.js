@@ -8,7 +8,6 @@ function photographerFactory(data) {
     const article = document.createElement('article');
     const link = document.createElement('a');
     link.setAttribute('href', `photographer.html?id=${id}`);
-    link.textContent = `lien`;
     const img = document.createElement('img');
     img.setAttribute('src', picture);
     const h2 = document.createElement('h2');
@@ -22,7 +21,7 @@ function photographerFactory(data) {
     const p4 = document.createElement('p');
     p4.textContent = `Price: ${price}`;
     article.appendChild(link);
-    article.appendChild(img);
+    link.appendChild(img);
     article.appendChild(h2);
     article.appendChild(p1);
     article.appendChild(p2);
@@ -32,8 +31,3 @@ function photographerFactory(data) {
   }
   return { name, picture, id, city, country, tagline, price, getUserCardDOM }
 }
-
-
-
-
-//export {photographerFactory}

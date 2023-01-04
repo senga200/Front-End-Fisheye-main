@@ -8,19 +8,32 @@
     height: 300px;
     margin: 0 100px;
 }
-img{
-    width: 50%;
+.photograph-header img{
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+}
+.photograph-header h2{
+  color : #901C1C; 
 }
 
+
+.photograph-header h1{
+    width: 150px;
+    color: #D3573C;
+}
+
+.photograph-gallery img{
+    width: 200px;
+}
 .contact_button {
-    border: dashed salmon;
     font-size: 20px;
     font-weight: bold;
     color: white;
     padding: 11px;
     width: 170px;
     height: 70px;
-    /*border: none; ATTENTION A REMETTRE*/
+    border: none; 
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
