@@ -31,3 +31,26 @@ function photographerFactory(data) {
   }
   return { name, picture, id, city, country, tagline, price, getUserCardDOM }
 }
+
+
+function mediaFactory(photographer) {
+  // Sélectionner la div photograph-header et styliser
+  const header = document.querySelector('.photograph-header');
+  header.style.display="flex";
+  header.style.justifyContent = "space-around";
+  header.style.alignItems = "center";
+  // Créer des nouvelles div
+  const blocGauche = document.createElement('div');
+  blocGauche.innerHTML = `<h1>${photographer.name}</h1>
+      <h2>${photographer.city}, ${photographer.country}</h2>
+      <p>${photographer.tagline}</p>`;
+  const blocCentre = document.createElement('div');
+  const contact = document.querySelector(".contact_button");
+  const blocDroit = document.createElement('div');
+  blocDroit.innerHTML =  `<img src="assets/photographers/${photographer.portrait}" alt="${photographer.name}" />`;
+  // Ajouter les nouvelles div à l'intérieur de photograph-header
+  header.appendChild(blocGauche);
+  header.appendChild(blocCentre);
+  header.appendChild(blocDroit);
+  blocCentre.appendChild(contact);
+}

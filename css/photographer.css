@@ -3,7 +3,6 @@
 }
 
 .photograph-header {
-    border: dashed blue ;
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
@@ -23,9 +22,11 @@
     color: #D3573C;
 }
 
-.photograph-gallery img{
-    width: 200px;
+.photograph-gallery img, video{
+    width: 350px;
+    height: 300px;
 }
+
 .contact_button {
     font-size: 20px;
     font-weight: bold;
