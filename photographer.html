@@ -23,18 +23,69 @@
       <div class="photograph-gallery"></div>
     </main>
     <div id="contact_modal">
-      <div class="modal">
+      <div class="modalBox">
         <header>
-          <h2>Contactez-moi</h2>
+          <h2 class="titre">Contactez-moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
 
-        <form>
-          <div>
-            <label>Prénom</label>
-            <input />
-          </div>
-          <button class="contact_button">Envoyer</button>
+        <form
+              name="contact"
+              action="photographer.html"
+              method="get"
+              id="contact"
+            >
+              <div class="formData">
+                <label for="first">Prénom</label><br/>
+                <input
+                  class="text-control"
+                  type="text"
+                  id="first"
+                  name="first"
+                  minlength="2"
+                  required/>
+                <br/>
+                <span id="prenomManquant"></span>
+              </div>
+              <div class="formData">
+                <label for="last">Nom</label><br/>
+                <input
+                  class="text-control"
+                  type="text"
+                  id="last"
+                  name="last"
+                  minlength="2"
+                  required/>
+                <br/>
+                <span id="nomManquant"></span>
+                <span class="champValide"></span>
+              </div>
+              <div class="formData">
+                <label for="email">E-mail</label><br/>
+                <input
+                  class="text-control"
+                  type="email"
+                  id="email"
+                  name="email"/>
+                <br />
+                <span id="mailManquant"></span>
+              </div>
+            <div class=""formData>
+              <label for="message">Message :</label><br>
+              <input 
+              class="text-control"
+              type ="textarea" 
+              id="message" 
+              name="message"
+              placeholder="Saisissez votre message"
+              minlength="10"
+              required/>
+              <span id="messageManquant"></span>
+              <br/>
+            </div>
+              <div class="formData">
+                <button class="contact_button" type="submit">Envoyer</button>
+              <span id="alerte"></span>
         </form>
       </div>
     </div>

@@ -36,14 +36,15 @@ function displayMedia(photos) {
   gallery.style.display="grid";
   gallery.style.gridTemplateColumns = 'repeat(3, 1fr)';
   gallery.style.gridRowGap = '60px';
+  gallery.style.color= "#901C1C";
   photos.forEach(photo => {
     const grid = document.createElement('div');
     if (photo.image) {
       // C'est une image
-      grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" />`;
+      grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" /><h4>${photo.title}</h4>`;
     } else if (photo.video) {
       // C'est une vidéo
-      grid.innerHTML = `<video src="assets/images/${photo.video}" alt="${photo.title}" controls></video>`;
+      grid.innerHTML = `<video src="assets/images/${photo.video}" alt="${photo.title}" controls></video><h4>${photo.title}</h4>`;
     }
     gallery.appendChild(grid);
   });

@@ -1,5 +1,12 @@
 #contact_modal {
     display: none;
+    position: fixed;
+    z-index: 1;
+    left: 50px;
+    top: 50px;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
 }
 
 .photograph-header {
@@ -22,9 +29,15 @@
     color: #D3573C;
 }
 
+
+.photograph-gallery{
+    margin: 50px 100px 50px 150px;
+}
+
 .photograph-gallery img, video{
     width: 350px;
     height: 300px;
+    border-radius: 5px;
 }
 
 .contact_button {
@@ -40,10 +53,12 @@
     cursor: pointer;
 }
 
-.modal {
+.modalBox {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+   /* width: 50%;*/
+   width: 670px;
+   /*height: 900px;*/
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,17 +67,17 @@
     margin: auto;
 }
 
-.modal header {
+.modalBox header {
     justify-content: space-between;
     width: 100%;
 }
 
-.modal header img {
+.modalBox header img {
     cursor: pointer;
 }
 
-.modal header h2 {
-    font-size: 64px;
+.modalBox header h2 {
+    font-size: 45px;
     font-weight: normal;
     text-align: center;
 }
@@ -76,7 +91,7 @@ form {
 
 form label {
     color: #312E2E;
-    font-size: 36px;
+    font-size: 30px;
 }
 
 form div {
@@ -92,4 +107,7 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+#message{
+    min-height: 200px;
 }
