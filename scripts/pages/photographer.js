@@ -29,42 +29,70 @@ async function recupData() {
 
 // Charger la page et appeler la fonction recupData
 document.addEventListener('DOMContentLoaded', recupData);
+//variables slider
+let currentPhotoIndex = 0;
+let photos;
+//variables galerie
+const gallery = document.querySelector('.photograph-gallery');
+gallery.style.display="grid";
+gallery.style.gridTemplateColumns = 'repeat(3, 1fr)';
+gallery.style.gridRowGap = '60px';
+gallery.style.color= "#901C1C";
+
 
 
 function displayMedia(photos) {
-  const gallery = document.querySelector('.photograph-gallery');
-  gallery.style.display="grid";
-  gallery.style.gridTemplateColumns = 'repeat(3, 1fr)';
-  gallery.style.gridRowGap = '60px';
-  gallery.style.color= "#901C1C";
+
+  const suivant = document.querySelector(".suivant");
+  //addeventlistener ('click',suivant)
+  
+  const precedent = document.querySelector(".precedent");
+  //addeventlistener ('click',precedent)
+
   photos.forEach(photo => {
+
     const grid = document.createElement('div');
     if (photo.image) {
-      // C'est une image
+      // image
       grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" /><h4>${photo.title}</h4>`;
     } else if (photo.video) {
-      // C'est une vidéo
+      // vidéo
       grid.innerHTML = `<video src="assets/images/${photo.video}" alt="${photo.title}" controls></video><h4>${photo.title}</h4>`;
     }
+        // Ajouter un événement click sur chaque élément img ou video
+        grid.querySelector('img, video').addEventListener('click', () => {
+         if (photo.image) {
+          const url = `assets/images/${photo.image}`;
+          displayLightBox(url);
+        } else if (photo.video) {
+          const url = `assets/images/${photo.video}`;
+          displayLightBox(url);
+        }
+        });
+
     gallery.appendChild(grid);
   });
 }
 
 
+  function displayLightBox(url) {
+    const modalLightBox = document.querySelector('#lightBox_Modal');
+    const content = document.querySelector('.lightBoxContent');
+    content.innerHTML = `<img src="${url}" alt="" />`;
+    modalLightBox.style.display = 'block';
+  }
+
+
+function closeLightBox() {
+  const modalLightBox = document.querySelector('#lightBox_Modal');
+  modalLightBox.style.display = "none";
+}
 
 
 
 
-// function mediaFactory(img){
-//   const {image} = img;
-//   const photos =`assets/images/${image}`;
-//   function getImageDOM(){
-//     const blocImage = document.createElement('div');
-//     const img = document.createElement('img');
-//     img.setAttribute('src', photos);
-//     blocImage.appendChild(img);
-//     return blocImage;
-//   }
-//   return {image,getImageDOM}
-// }
+//function suivant()
+
+
+//function precedent()
 

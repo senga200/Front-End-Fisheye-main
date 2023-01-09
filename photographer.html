@@ -4,88 +4,117 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <script
+      src="https://kit.fontawesome.com/21df0f8715.js"
+      crossorigin="anonymous"
+    ></script>
     <link
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
     <title>Fisheye - photographe</title>
   </head>
+
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" alt="Logo FishEye" />
     </header>
+
     <main id="main">
+      <!-- PHOTOGRAPHE HEADER -->
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()">
           Contactez-moi
         </button>
       </div>
-      <div class="photograph-gallery"></div>
+
+      <div class="photograph-gallery">
+        <div id="lightBox_Modal">
+          <img
+            src="assets/icons/close.svg"
+            alt="close"
+            onclick="closeLightBox()"
+          />
+          <div class="suivant">
+            <i class="fas fa-chevron-circle-right"></i>
+          </div>
+
+          <div class="precedent">
+            <i class="fas fa-chevron-circle-left"></i>
+          </div>
+          <div class="lightBoxContent" onclick="displayLightBox()"></div>
+        </div>
+      </div>
     </main>
+
     <div id="contact_modal">
       <div class="modalBox">
         <header>
           <h2 class="titre">Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img
+            src="assets/icons/close.svg"
+            alt="close"
+            onclick="closeModal()"
+          />
         </header>
 
         <form
-              name="contact"
-              action="photographer.html"
-              method="get"
-              id="contact"
-            >
-              <div class="formData">
-                <label for="first">Prénom</label><br/>
-                <input
-                  class="text-control"
-                  type="text"
-                  id="first"
-                  name="first"
-                  minlength="2"
-                  required/>
-                <br/>
-                <span id="prenomManquant"></span>
-              </div>
-              <div class="formData">
-                <label for="last">Nom</label><br/>
-                <input
-                  class="text-control"
-                  type="text"
-                  id="last"
-                  name="last"
-                  minlength="2"
-                  required/>
-                <br/>
-                <span id="nomManquant"></span>
-                <span class="champValide"></span>
-              </div>
-              <div class="formData">
-                <label for="email">E-mail</label><br/>
-                <input
-                  class="text-control"
-                  type="email"
-                  id="email"
-                  name="email"/>
-                <br />
-                <span id="mailManquant"></span>
-              </div>
-            <div class=""formData>
-              <label for="message">Message :</label><br>
-              <input 
+          name="contact"
+          action="photographer.html"
+          method="get"
+          id="contact"
+        >
+          <div class="formData">
+            <label for="first">Prénom</label><br />
+            <input
               class="text-control"
-              type ="textarea" 
-              id="message" 
+              type="text"
+              id="first"
+              name="first"
+              minlength="2"
+              required
+            />
+            <br />
+            <span id="prenomManquant"></span>
+          </div>
+          <div class="formData">
+            <label for="last">Nom</label><br />
+            <input
+              class="text-control"
+              type="text"
+              id="last"
+              name="last"
+              minlength="2"
+              required
+            />
+            <br />
+            <span id="nomManquant"></span>
+            <span class="champValide"></span>
+          </div>
+          <div class="formData">
+            <label for="email">E-mail</label><br />
+            <input class="text-control" type="email" id="email" name="email" />
+            <br />
+            <span id="mailManquant"></span>
+          </div>
+          <div class="formData">
+            <label for="message">Message :</label><br />
+            <input
+              class="text-control"
+              type="textarea"
+              id="message"
               name="message"
               placeholder="Saisissez votre message"
               minlength="10"
-              required/>
-              <span id="messageManquant"></span>
-              <br/>
-            </div>
-              <div class="formData">
-                <button class="contact_button" type="submit">Envoyer</button>
-              <span id="alerte"></span>
+              required
+            />
+            <span id="messageManquant"></span>
+            <br />
+          </div>
+          <div class="formData">
+            <button class="contact_button" type="submit">Envoyer</button>
+            <span id="alerte"></span>
+          </div>
         </form>
       </div>
     </div>

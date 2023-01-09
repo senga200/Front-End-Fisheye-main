@@ -1,5 +1,6 @@
 #contact_modal {
     display: none;
+    background-color: yellow;
     position: fixed;
     z-index: 1;
     left: 50px;
@@ -7,6 +8,32 @@
     height: 100%;
     width: 100%;
     overflow: auto;
+}
+
+#lightBox_Modal{
+    background-color: blue;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 50px;
+    top: 50px;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.lightBoxContent{
+    background-color: grey;
+    border-radius: 5px;
+   /* width: 50%;*/
+   width: 670px;
+   /*height: 900px;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: auto;
 }
 
 .photograph-header {
