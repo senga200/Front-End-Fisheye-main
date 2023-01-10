@@ -5,12 +5,14 @@ function photographerFactory(data) {
  
 
   function getUserCardDOM() {
+    //let index = 0;
     const article = document.createElement('article');
     article.style.textAlign = "center";
     const link = document.createElement('a');
     link.setAttribute('href', `photographer.html?id=${id}`);
     const img = document.createElement('img');
     img.setAttribute('src', picture);
+    img.setAttribute('aria-label', `En savoir plus sur ${name}`);
     const h2 = document.createElement('h2');
     h2.textContent = `${name}`;
     const h3 = document.createElement('h3');

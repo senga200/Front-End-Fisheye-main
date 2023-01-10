@@ -30,7 +30,7 @@ async function recupData() {
 // Charger la page et appeler la fonction recupData
 document.addEventListener('DOMContentLoaded', recupData);
 //variables slider
-let currentPhotoIndex = 0;
+let index = 0;
 let photos;
 //variables galerie
 const gallery = document.querySelector('.photograph-gallery');
@@ -42,14 +42,28 @@ gallery.style.color= "#901C1C";
 
 
 function displayMedia(photos) {
-
+// fleches suivant/precedent du slider
   const suivant = document.querySelector(".suivant");
-  //addeventlistener ('click',suivant)
-  
   const precedent = document.querySelector(".precedent");
-  //addeventlistener ('click',precedent)
 
-  photos.forEach(photo => {
+  suivant.addEventListener('click', () => {
+    index++;
+    if (index >= photos.length) {
+      index = 0;
+    }
+    displayLightBox(photos, index);
+  });
+  
+  precedent.addEventListener('click', () => {
+    index--;
+    if (index < 0) {
+      index = photos.length - 1;
+    }
+    displayLightBox(photos, index);
+  });
+  
+
+  photos.forEach((photo, index) => {
 
     const grid = document.createElement('div');
     if (photo.image) {
@@ -59,15 +73,9 @@ function displayMedia(photos) {
       // vidéo
       grid.innerHTML = `<video src="assets/images/${photo.video}" alt="${photo.title}" controls></video><h4>${photo.title}</h4>`;
     }
-        // Ajouter un événement click sur chaque élément img ou video
+        // Ajouter un événement clic sur chaque élément img ou video
         grid.querySelector('img, video').addEventListener('click', () => {
-         if (photo.image) {
-          const url = `assets/images/${photo.image}`;
-          displayLightBox(url);
-        } else if (photo.video) {
-          const url = `assets/images/${photo.video}`;
-          displayLightBox(url);
-        }
+          displayLightBox(photos, index);
         });
 
     gallery.appendChild(grid);
@@ -75,7 +83,14 @@ function displayMedia(photos) {
 }
 
 
-  function displayLightBox(url) {
+function displayLightBox(photos, index) {
+    const photo = photos[index];
+    let url ;
+    if (photo.image) {
+      url = `assets/images/${photo.image}`;
+     } else if (photo.video) {
+      url = `assets/images/${photo.video}`;
+     }
     const modalLightBox = document.querySelector('#lightBox_Modal');
     const content = document.querySelector('.lightBoxContent');
     content.innerHTML = `<img src="${url}" alt="" />`;
@@ -87,12 +102,4 @@ function closeLightBox() {
   const modalLightBox = document.querySelector('#lightBox_Modal');
   modalLightBox.style.display = "none";
 }
-
-
-
-
-//function suivant()
-
-
-//function precedent()
 
