@@ -1,5 +1,20 @@
 //Mettre le code JavaScript lié à la page photographer.html
 
+//variables slider
+let index = 0;
+let photos;
+const suivant = document.querySelector(".suivant");
+const precedent = document.querySelector(".precedent");
+//variables galerie
+const gallery = document.querySelector('.photograph-gallery');
+gallery.style.display="grid";
+gallery.style.gridTemplateColumns = 'repeat(3, 1fr)';
+gallery.style.gridRowGap = '60px';
+gallery.style.columnGap = '110px';
+gallery.style.color= "#901C1C";
+
+
+////////////////////////////////////////////////
 async function getPhotographerData() {
   try {
     // Récupérer les données du photographe à partir de l ID de l URL
@@ -17,7 +32,7 @@ async function getPhotographerData() {
     console.error(error);
   }
 }
-
+///////////////////////////////////////////////
 async function recupData() {
   // Récupérer les données sur le photographe et afficher le photographe
   const photographer = await getPhotographerData();
@@ -26,80 +41,108 @@ async function recupData() {
     const photos = photographer.photos;
     displayMedia(photos);
 }
-
+////////////////////////////////////////////////
 // Charger la page et appeler la fonction recupData
 document.addEventListener('DOMContentLoaded', recupData);
-//variables slider
-let index = 0;
-let photos;
-//variables galerie
-const gallery = document.querySelector('.photograph-gallery');
-gallery.style.display="grid";
-gallery.style.gridTemplateColumns = 'repeat(3, 1fr)';
-gallery.style.gridRowGap = '60px';
-gallery.style.color= "#901C1C";
 
-
-
+////////////////////////////////////////////////
 function displayMedia(photos) {
-// fleches suivant/precedent du slider
-  const suivant = document.querySelector(".suivant");
-  const precedent = document.querySelector(".precedent");
-
-  suivant.addEventListener('click', () => {
-    index++;
+//ecoute sur le clic 
+  suivant.addEventListener('click',() => {
     if (index >= photos.length) {
-      index = 0;
+        index = 0;
     }
-    displayLightBox(photos, index);
+      index++;
+          displayLightBox(photos, index);
   });
-  
   precedent.addEventListener('click', () => {
-    index--;
     if (index < 0) {
       index = photos.length - 1;
     }
-    displayLightBox(photos, index);
+    index--;
+          displayLightBox(photos, index);
   });
-  
+  //  ecoute sur le clavier /droite/gauche
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      precedent.click();
+    } else if(e.key === "ArrowRight") {
+      suivant.click();
+    }
+          displayLightBox(photos, index);
+  });
+  //"Echap"
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { 
+          closeLightBox();
+    }
+  });
+
 
   photos.forEach((photo, index) => {
 
     const grid = document.createElement('div');
-    if (photo.image) {
+    const infoPhoto = document.createElement('div');
+    infoPhoto.innerHTML = `<h4>${photo.title}</h4>`;
+    infoPhoto.style.display ="flex";
+    infoPhoto.style.justifyContent ="space-between";
+    infoPhoto.style.alignItems = "center";
+    infoPhoto.style.padding = "0";
+      if (photo.image) {
       // image
-      grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" /><h4>${photo.title}</h4>`;
-    } else if (photo.video) {
+      grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" />`;
+      } else if (photo.video) {
       // vidéo
-      grid.innerHTML = `<video src="assets/images/${photo.video}" alt="${photo.title}" controls></video><h4>${photo.title}</h4>`;
-    }
-        // Ajouter un événement clic sur chaque élément img ou video
-        grid.querySelector('img, video').addEventListener('click', () => {
+      grid.innerHTML = `<video src="assets/images/${photo.video}" alt="${photo.title}"controls>`;
+      }
+      // Ajouter un événement clic sur chaque élément img ou video
+      grid.querySelector('img, video').addEventListener('click', () => {
           displayLightBox(photos, index);
-        });
-
-    gallery.appendChild(grid);
+      });
+            gallery.appendChild(grid);
+            infoPhoto.appendChild(compteurLikes());
+            grid.appendChild(infoPhoto);
   });
 }
 
+////////////////////////////////////////////////
+function compteurLikes(){
+  let compteur = 0; 
+  const likes = document.createElement('span');
+  likes.innerHTML = "❤" + compteur;
+  likes.addEventListener("click", function(){
+    if (compteur < 1) {
+      compteur++;
+      likes.innerHTML = "❤" + compteur;
+    }
+  });
+  return likes;
+}
 
+////////////////////////////////////////////////
 function displayLightBox(photos, index) {
-    const photo = photos[index];
-    let url ;
-    if (photo.image) {
-      url = `assets/images/${photo.image}`;
-     } else if (photo.video) {
-      url = `assets/images/${photo.video}`;
-     }
-    const modalLightBox = document.querySelector('#lightBox_Modal');
+  const photo = photos[index];
+  let url;
+  if (photo.image) {
+    url = `assets/images/${photo.image}`;
     const content = document.querySelector('.lightBoxContent');
-    content.innerHTML = `<img src="${url}" alt="" />`;
-    modalLightBox.style.display = 'block';
+    content.innerHTML = `<img src="${url}" alt="${photo.title}"/><h4>${photo.title}</h4>`;
+  } else if (photo.video) {
+    url = `assets/images/${photo.video}`;
+    const content = document.querySelector('.lightBoxContent');
+    content.innerHTML = `<video src="${url}" alt="${photo.title}"controls><h4>${photo.title}</h4>`;
   }
+  const modalLightBox = document.querySelector('#lightBox_Modal');
+  modalLightBox.style.display = 'block';
+}
 
-
+////////////////////////////////////////////////
 function closeLightBox() {
   const modalLightBox = document.querySelector('#lightBox_Modal');
   modalLightBox.style.display = "none";
 }
+///////////////////////////////////////////////
+
+
+
 
