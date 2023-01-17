@@ -42,7 +42,6 @@ async function recupData() {
     // Récupérer les photos du photographe et les afficher
      photos = photographer.photos;
     displayMedia(photos);
-    
 }
 ////////////////////////////////////////////////
 // Charger la page et appeler la fonction recupData
@@ -133,19 +132,6 @@ function displayMedia() {
   });
 }
 
-////////////////////////////////////////////////
-function compteurLikes(){
-  let compteur = 0; 
-  const likes = document.createElement('span');
-  likes.innerHTML = "❤" + compteur;
-  likes.addEventListener("click", function(){
-    if (compteur < 1) {
-      compteur++;
-      likes.innerHTML = "❤" + compteur;
-    }
-  });
-  return likes;
-}
 
 ////////////////////////////////////////////////
 function displayLightBox(photos, index) {
@@ -220,4 +206,3 @@ select.addEventListener('change', () => {
         
         displayMedia();
           });
-          
