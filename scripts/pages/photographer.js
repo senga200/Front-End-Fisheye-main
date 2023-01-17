@@ -35,6 +35,7 @@ async function getPhotographerData() {
   }
 }
 ///////////////////////////////////////////////
+///////////////////////////////////////////////
 async function recupData() {
   // Récupérer les données sur le photographe et afficher le photographe
   const photographer = await getPhotographerData();
@@ -44,6 +45,7 @@ async function recupData() {
     displayMedia(photos);
     
 }
+////////////////////////////////////////////////
 ////////////////////////////////////////////////
 // Charger la page et appeler la fonction recupData
 document.addEventListener('DOMContentLoaded', recupData);
@@ -120,7 +122,13 @@ function displayMedia() {
       // image
       grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" />`;
       } else if (photo.video) {
+      grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" />`;
+      } else if (photo.video) {
       // vidéo
+      grid.innerHTML = `<video src="assets/images/${photo.video}" alt="${photo.title}"controls>`;
+      }
+      // Ajouter un événement clic sur chaque élément img ou video
+      grid.querySelector('img, video').addEventListener('click', () => {
       grid.innerHTML = `<video src="assets/images/${photo.video}" alt="${photo.title}"controls>`;
       }
       // Ajouter un événement clic sur chaque élément img ou video
@@ -133,6 +141,19 @@ function displayMedia() {
   });
 }
 
+////////////////////////////////////////////////
+function compteurLikes(){
+  let compteur = 0; 
+  const likes = document.createElement('span');
+  likes.innerHTML = "❤" + compteur;
+  likes.addEventListener("click", function(){
+    if (compteur < 1) {
+      compteur++;
+      likes.innerHTML = "❤" + compteur;
+    }
+  });
+  return likes;
+}
 
 ////////////////////////////////////////////////
 function displayLightBox(photos, index) {
@@ -156,56 +177,4 @@ function closeLightBox() {
   const modalLightBox = document.querySelector('#lightBox_Modal');
   modalLightBox.style.display = "none";
 }
-///////////////////////////////////////////////
-
-//vider la galerie avant d'afficher la galerie triée cf innerHTML="" ou remove  juste avant de les réafficher
-const select = document.getElementById('selector');
-select.addEventListener('change', () => {
- // const gallery = document.querySelector('.photograph-gallery');
-  const selectedOption = select.value;
-
-    switch(selectedOption) {
-        case "popularite":
-          photos.sort(function(a, b) {
-            if (a.likes < b.likes) {
-              return 1;
-            }
-            if (a.likes > b.likes) {
-              return -1;
-            }
-            return 0;
-          });
-    
-            break;
-        case "Date":
-          photos.sort(function(a, b) {
-            if (a.date < b.date) {
-              return -1;
-            }
-            if (a.date > b.date) {
-              return 1;
-            }
-            return 0;
-          });
-            break;
-        case "Titre":
-          photos.sort(function(a, b) {
-            if (a.title < b.title) {
-              return -1;
-            }
-            if (a.title > b.title) {
-              return 1;
-            }
-            return 0;
-          });
-          break;
-        }const gallery = document.querySelector('.photograph-gallery');
-        const children = gallery.children;
-        while (children.length > 0) {
-          children[0].remove();
-        }
-        
-        displayMedia();
-          });
-          
 
