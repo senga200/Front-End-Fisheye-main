@@ -2,7 +2,7 @@
 
 //variables slider
 let index = 0;
-let photos;
+let photos=[];
 const suivant = document.querySelector(".suivant");
 const precedent = document.querySelector(".precedent");
 //variables galerie
@@ -15,6 +15,7 @@ gallery.style.color= "#901C1C";
 
 
 ////////////////////////////////////////////////
+let photographerPrice;
 async function getPhotographerData() {
   try {
     // Récupérer les données du photographe à partir de l ID de l URL
@@ -26,6 +27,7 @@ async function getPhotographerData() {
     // Récupérer les photos du photographe
     const photos = data.media.filter(photo => photo.photographerId == id);
     photographer.photos = photos;
+    photographerPrice = photographer.price;
     return photographer;
   } 
   catch (error) {
@@ -38,56 +40,82 @@ async function recupData() {
   const photographer = await getPhotographerData();
   mediaFactory(photographer);
     // Récupérer les photos du photographe et les afficher
-    const photos = photographer.photos;
+     photos = photographer.photos;
     displayMedia(photos);
+    
 }
 ////////////////////////////////////////////////
 // Charger la page et appeler la fonction recupData
 document.addEventListener('DOMContentLoaded', recupData);
+//ecoute sur le clic 
+suivant.addEventListener('click',() => {
+  if (index >= photos.length) {
+      index = 0;
+  }
+    index++;
+        displayLightBox(photos, index);
+});
+precedent.addEventListener('click', () => {
+  if (index < 0) {
+    index = photos.length - 1;
+  }
+  index--;
+        displayLightBox(photos, index);
+});
+//  ecoute sur le clavier /droite/gauche
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft") {
+    precedent.click();
+  } else if(e.key === "ArrowRight") {
+    suivant.click();
+  }
+        displayLightBox(photos, index);
+});
+//"Echap"
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") { 
+        closeLightBox();
+  }
+});
+//
+////////////////////////////////////////////////
 
 ////////////////////////////////////////////////
-function displayMedia(photos) {
-//ecoute sur le clic 
-  suivant.addEventListener('click',() => {
-    if (index >= photos.length) {
-        index = 0;
-    }
-      index++;
-          displayLightBox(photos, index);
-  });
-  precedent.addEventListener('click', () => {
-    if (index < 0) {
-      index = photos.length - 1;
-    }
-    index--;
-          displayLightBox(photos, index);
-  });
-  //  ecoute sur le clavier /droite/gauche
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") {
-      precedent.click();
-    } else if(e.key === "ArrowRight") {
-      suivant.click();
-    }
-          displayLightBox(photos, index);
-  });
-  //"Echap"
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") { 
-          closeLightBox();
-    }
-  });
-
-
+let totalCompteur = 0;
+function displayMedia() {
   photos.forEach((photo, index) => {
-
     const grid = document.createElement('div');
     const infoPhoto = document.createElement('div');
+    const price = document.querySelector('.price');
+    price.innerHTML = `test`;
     infoPhoto.innerHTML = `<h4>${photo.title}</h4>`;
     infoPhoto.style.display ="flex";
     infoPhoto.style.justifyContent ="space-between";
     infoPhoto.style.alignItems = "center";
     infoPhoto.style.padding = "0";
+    let totalCompteur = `${photo.likes}`;
+    let alreadyClicked = false;
+
+    function compteurLikes(likes) {
+      const totalLikes = document.querySelector('.totalLikes');
+      totalLikes.style.border ="solid 1px red";
+      let compteur = likes; 
+      const heart = document.createElement('span');
+      heart.style.cursor="pointer";
+      //compteur sous chq photo
+      heart.innerHTML = "❤" + compteur;
+      heart.addEventListener("click", function(){
+        if (!alreadyClicked) {
+          compteur++;
+          totalCompteur++;
+          totalLikes.innerHTML = totalCompteur + " ❤" + photographerPrice +" € / jour "; 
+          heart.innerHTML = "❤" + compteur;
+          alreadyClicked = true;
+        }  
+      });
+      return heart;
+    }
+    
       if (photo.image) {
       // image
       grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" />`;
@@ -100,24 +128,11 @@ function displayMedia(photos) {
           displayLightBox(photos, index);
       });
             gallery.appendChild(grid);
-            infoPhoto.appendChild(compteurLikes());
             grid.appendChild(infoPhoto);
+            infoPhoto.appendChild(compteurLikes(totalCompteur));
   });
 }
 
-////////////////////////////////////////////////
-function compteurLikes(){
-  let compteur = 0; 
-  const likes = document.createElement('span');
-  likes.innerHTML = "❤" + compteur;
-  likes.addEventListener("click", function(){
-    if (compteur < 1) {
-      compteur++;
-      likes.innerHTML = "❤" + compteur;
-    }
-  });
-  return likes;
-}
 
 ////////////////////////////////////////////////
 function displayLightBox(photos, index) {
@@ -143,6 +158,54 @@ function closeLightBox() {
 }
 ///////////////////////////////////////////////
 
+//vider la galerie avant d'afficher la galerie triée cf innerHTML="" ou remove  juste avant de les réafficher
+const select = document.getElementById('selector');
+select.addEventListener('change', () => {
+ // const gallery = document.querySelector('.photograph-gallery');
+  const selectedOption = select.value;
 
-
+    switch(selectedOption) {
+        case "popularite":
+          photos.sort(function(a, b) {
+            if (a.likes < b.likes) {
+              return 1;
+            }
+            if (a.likes > b.likes) {
+              return -1;
+            }
+            return 0;
+          });
+    
+            break;
+        case "Date":
+          photos.sort(function(a, b) {
+            if (a.date < b.date) {
+              return -1;
+            }
+            if (a.date > b.date) {
+              return 1;
+            }
+            return 0;
+          });
+            break;
+        case "Titre":
+          photos.sort(function(a, b) {
+            if (a.title < b.title) {
+              return -1;
+            }
+            if (a.title > b.title) {
+              return 1;
+            }
+            return 0;
+          });
+          break;
+        }const gallery = document.querySelector('.photograph-gallery');
+        const children = gallery.children;
+        while (children.length > 0) {
+          children[0].remove();
+        }
+        
+        displayMedia();
+          });
+          
 

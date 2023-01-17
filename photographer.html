@@ -27,6 +27,16 @@
           Contactez-moi
         </button>
       </div>
+      <section class="filtres" aria-label="Filtres de tri">
+        <label class="tri" for="tri">Trier par </label>
+        <div class="dropdown">
+          <select id="selector">
+            <option value="popularite">Popularité</option>
+            <option value="Date">Date</option>
+            <option value="Titre">Titre</option>
+          </select>
+        </div>
+      </section>
 
       <div class="photograph-gallery">
         <div id="lightBox_Modal">
@@ -57,6 +67,10 @@
           </div>
         </div>
       </div>
+      <span class="priceLikes">
+        <span class="totalLikes">0</span>
+        <span class="price"></span>
+      </span>
     </main>
 
     <div id="contact_modal">
