@@ -2,7 +2,7 @@
 
 #contact_modal {
     display: none;
-    background-color: yellow;
+    /*background-color: yellow;*/
     position: fixed;
     z-index: 1;
     left: 50px;
@@ -72,7 +72,7 @@
     font-weight: bold;
 }
 .dropdown{
-    border: solid yellow;
+    border: solid yellow;f
 }
 
 #selector{
@@ -91,7 +91,7 @@ option:hover{
     padding : 15px;
 }
 .photograph-gallery{
-    margin: 50px 100px 50px 150px;
+    margin: 50px;
 }
 
 .photograph-gallery img, video{
@@ -116,8 +116,8 @@ option:hover{
 .modalBox {
     border-radius: 5px;
     background-color: #DB8876;
-   /* width: 50%;*/
-   width: 670px;
+   width:35%;
+   /*width: 500px;*/
    /*height: 900px;*/
     display: flex;
     flex-direction: column;
@@ -141,44 +141,44 @@ option:hover{
     font-weight: normal;
     text-align: center;
 }
-.totalLikes {
-    position: fixed;
-    z-index: 1;
-    bottom: 0;
-    right : 0; 
-    background-color: #DB8876;
-    height: 25px ;
-    margin-right: 20px;
-    padding: 10px;
-    border-radius: 5px 5px 0px 0px;
-}
-
 form {
     display: flex;
     width: 100%;
+    height: 900px;
     flex-direction: column;
-    align-items: flex-start;
+    /*align-items: flex-start;*/
 }
-
 form label {
     color: #312E2E;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 form div {
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: self-start;
     margin-bottom: 26px;
 }
 
 form input {
     width: 100%;
-    height: 68px;
+    height: 60px;
     border: none;
     border-radius: 5px;
 }
 #message{
     min-height: 200px;
+ vertical-align : baseline;
+}
+
+.totalLikes {
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    right : 0; 
+    background-color: #DB8876;
+    height: 35px ;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 5px 5px 0px 0px;
 }

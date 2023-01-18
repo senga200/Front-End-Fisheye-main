@@ -80,58 +80,61 @@ document.addEventListener("keydown", (e) => {
 ////////////////////////////////////////////////
 
 ////////////////////////////////////////////////
-let totalCompteur = 0;
+
 function displayMedia() {
+  //mettre le compteur à 0
+  let totalCompteur = 0;
   photos.forEach((photo, index) => {
+    //grid : chaque bloc photo
     const grid = document.createElement('div');
     const infoPhoto = document.createElement('div');
-    const price = document.querySelector('.price');
-    price.innerHTML = `test`;
     infoPhoto.innerHTML = `<h4>${photo.title}</h4>`;
-    infoPhoto.style.display ="flex";
-    infoPhoto.style.justifyContent ="space-between";
+    infoPhoto.style.display = "flex";
+    infoPhoto.style.justifyContent = "space-between";
     infoPhoto.style.alignItems = "center";
     infoPhoto.style.padding = "0";
-    let totalCompteur = `${photo.likes}`;
+    //chq boucle ajoute les likes d'une photo à total compteur
+    //soit totalCompteur = totalCompteur + photo.likes;
+    totalCompteur += photo.likes;
     let alreadyClicked = false;
-
-    function compteurLikes(likes) {
-      const totalLikes = document.querySelector('.totalLikes');
-      totalLikes.style.border ="solid 1px red";
-      let compteur = likes; 
-      const heart = document.createElement('span');
-      heart.style.cursor="pointer";
-      //compteur sous chq photo
-      heart.innerHTML = "❤" + compteur;
-      heart.addEventListener("click", function(){
-        if (!alreadyClicked) {
-          compteur++;
-          totalCompteur++;
-          totalLikes.innerHTML = totalCompteur + " ❤" + photographerPrice +" € / jour "; 
-          heart.innerHTML = "❤" + compteur;
-          alreadyClicked = true;
-        }  
-      });
-      return heart;
-    }
-    
-      if (photo.image) {
-      // image
-      grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" />`;
-      } else if (photo.video) {
-      // vidéo
-      grid.innerHTML = `<video src="assets/images/${photo.video}" alt="${photo.title}"controls>`;
+    const blocPriceLikes = document.querySelector(".priceLikes");
+    const totalLikes = document.querySelector('.totalLikes');
+    const price = document.querySelector(".price");
+    price.innerHTML = photographerPrice + " € / jour ";
+    //premier affichage
+    totalLikes.innerHTML = totalCompteur + " ❤ " + photographerPrice + " € / jour ";
+    //heart : coeur de la photo
+    const heart = document.createElement('span');
+    heart.style.cursor = "pointer";
+    heart.innerHTML = "❤" + photo.likes;
+    heart.addEventListener("click", function () {
+      //si ce n'est pas cliqué, on peut ajouter+1
+      if (!alreadyClicked) {
+        //ajoute un like à la photo (alreadyClicked = 1fois = true)
+        photo.likes++;
+        totalCompteur += 1;
+        totalLikes.innerHTML = totalCompteur + " ❤" + photographerPrice + " € / jour ";
+        heart.innerHTML = "❤" + photo.likes;
+        alreadyClicked = true;
       }
-      // Ajouter un événement clic sur chaque élément img ou video
-      grid.querySelector('img, video').addEventListener('click', () => {
-          displayLightBox(photos, index);
-      });
-            gallery.appendChild(grid);
-            grid.appendChild(infoPhoto);
-            infoPhoto.appendChild(compteurLikes(totalCompteur));
+    });
+//ajoute photo ou video dans un bloc image (grid)
+    if (photo.image) {
+      grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" />`;
+    } else if (photo.video) {
+      grid.innerHTML = `<video src="assets/images/${photo.video}" alt="${photo.title}" controls>`;
+    }
+//au clic sur un bloc image, ouverture de la lightBox
+    grid.querySelector('img, video').addEventListener('click', () => {
+      displayLightBox(photos, index);
+    });
+    gallery.appendChild(grid);
+    grid.appendChild(infoPhoto);
+    infoPhoto.appendChild(heart);
+    blocPriceLikes.appendChild(price);
+    blocPriceLikes.appendChild(totalLikes);
   });
 }
-
 
 ////////////////////////////////////////////////
 function displayLightBox(photos, index) {
