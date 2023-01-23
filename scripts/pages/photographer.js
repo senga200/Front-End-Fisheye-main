@@ -1,5 +1,7 @@
 //Mettre le code JavaScript lié à la page photographer.html
-
+//variables lightbox
+const modalLightBox = document.querySelector('#lightBox_Modal');
+    const content = document.querySelector('.lightBoxContent');
 //variables slider
 let index = 0;
 let photos=[];
@@ -12,7 +14,9 @@ gallery.style.gridTemplateColumns = 'repeat(3, 1fr)';
 gallery.style.gridRowGap = '60px';
 gallery.style.columnGap = '110px';
 gallery.style.color= "#901C1C";
-
+// if (window.innerWidth < 700) {
+//   gallery.style.gridTemplateColumns = '1fr';}
+const children = gallery.children;
 
 ////////////////////////////////////////////////
 let photographerPrice;
@@ -42,6 +46,9 @@ async function recupData() {
     // Récupérer les photos du photographe et les afficher
      photos = photographer.photos;
     displayMedia(photos);
+     // Récupérer le nom du photographe et l'ajouter au formulaire
+  const nom = document.querySelector(".nom");
+  nom.innerHTML = photographer.name;
 }
 ////////////////////////////////////////////////
 // Charger la page et appeler la fonction recupData
@@ -76,21 +83,20 @@ document.addEventListener("keydown", (e) => {
         closeLightBox();
   }
 });
-//
-////////////////////////////////////////////////
 
-////////////////////////////////////////////////
+//////AFFICHAGE DE LA GALERIE = PHOTOS + LIKES///////////
 
 function displayMedia() {
   //mettre le compteur à 0
   let totalCompteur = 0;
   photos.forEach((photo, index) => {
-    //grid : chaque bloc photo
+    //grid : chaque bloc photo de la galerie
     const grid = document.createElement('div');
+    grid.style.cursor ="pointer";
     const infoPhoto = document.createElement('div');
     infoPhoto.innerHTML = `<h4>${photo.title}</h4>`;
     infoPhoto.style.display = "flex";
-    infoPhoto.style.justifyContent = "space-between";
+    infoPhoto.style.justifyContent = "space-around";
     infoPhoto.style.alignItems = "center";
     infoPhoto.style.padding = "0";
     //chq boucle ajoute les likes d'une photo à total compteur
@@ -100,7 +106,7 @@ function displayMedia() {
     const blocPriceLikes = document.querySelector(".priceLikes");
     const totalLikes = document.querySelector('.totalLikes');
     const price = document.querySelector(".price");
-    price.innerHTML = photographerPrice + " € / jour ";
+    //price.innerHTML = photographerPrice + " € / jour ";
     //premier affichage
     totalLikes.innerHTML = totalCompteur + " ❤ " + photographerPrice + " € / jour ";
     //heart : coeur de la photo
@@ -113,7 +119,8 @@ function displayMedia() {
         //ajoute un like à la photo (alreadyClicked = 1fois = true)
         photo.likes++;
         totalCompteur += 1;
-        totalLikes.innerHTML = totalCompteur + " ❤" + photographerPrice + " € / jour ";
+        totalLikes.innerHTML = totalCompteur + " ❤";
+        //price.innerHTML = photographerPrice + " € / jour ";
         heart.innerHTML = "❤" + photo.likes;
         alreadyClicked = true;
       }
@@ -136,34 +143,36 @@ function displayMedia() {
   });
 }
 
-////////////////////////////////////////////////
+///////////AFFICHAGE DE LA LIGHTBOX/////////////////////
+const fermer= document.querySelector(".close");
 function displayLightBox(photos, index) {
   const photo = photos[index];
   let url;
   if (photo.image) {
     url = `assets/images/${photo.image}`;
-    const content = document.querySelector('.lightBoxContent');
     content.innerHTML = `<img src="${url}" alt="${photo.title}"/><h4>${photo.title}</h4>`;
+    //photo.style.width = "800px";
   } else if (photo.video) {
     url = `assets/images/${photo.video}`;
-    const content = document.querySelector('.lightBoxContent');
     content.innerHTML = `<video src="${url}" alt="${photo.title}"controls><h4>${photo.title}</h4>`;
   }
-  const modalLightBox = document.querySelector('#lightBox_Modal');
   modalLightBox.style.display = 'block';
 }
 
-////////////////////////////////////////////////
+function closeLightBox() {
+  modalLightBox.style.display = "none";
+}
+
 function closeLightBox() {
   const modalLightBox = document.querySelector('#lightBox_Modal');
   modalLightBox.style.display = "none";
 }
-///////////////////////////////////////////////
+
+///////////////TRI//////////////////////
 
 //vider la galerie avant d'afficher la galerie triée cf innerHTML="" ou remove  juste avant de les réafficher
 const select = document.getElementById('selector');
 select.addEventListener('change', () => {
- // const gallery = document.querySelector('.photograph-gallery');
   const selectedOption = select.value;
 
     switch(selectedOption) {
@@ -201,11 +210,12 @@ select.addEventListener('change', () => {
             return 0;
           });
           break;
-        }const gallery = document.querySelector('.photograph-gallery');
-        const children = gallery.children;
+        }
         while (children.length > 0) {
           children[0].remove();
         }
-        
         displayMedia();
           });
+
+          ////////////////////////////////////////////////
+

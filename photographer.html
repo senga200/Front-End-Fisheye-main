@@ -17,13 +17,22 @@
 
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" alt="Logo FishEye" />
+      <a href="index.html" aria-label="Retour à l'accueil">
+        <img
+          src="assets/images/logo.png"
+          class="logo"
+          alt="Logo FishEye, retour à l'accueil"
+      /></a>
     </header>
 
     <main id="main">
       <!-- PHOTOGRAPHE HEADER -->
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">
+        <button
+          class="contact_button"
+          aria-label="Ouvrir le formulaire de contact"
+          onclick="displayModal()"
+        >
           Contactez-moi
         </button>
       </div>
@@ -39,36 +48,54 @@
       </section>
 
       <div class="photograph-gallery">
-        <div id="lightBox_Modal">
-          <img
-            src="assets/icons/close.svg"
-            alt="close"
-            onclick="closeLightBox()"
-          />
-          <div class="suivant">
-            <i class="fas fa-chevron-circle-right"></i>
-          </div>
+        <div id="lightBox_Modal" aria-hidden="true">
+          <div class="icon">
+            <div class="fleches">
+              <div class="precedent">
+                <i
+                  class="fas fa-chevron-left"
+                  aria-label="Image précédente"
+                ></i>
+              </div>
+              <div class="suivant">
+                <i class="fas fa-chevron-right" aria-label="Image suivante"></i>
+              </div>
+            </div>
 
-          <div class="precedent">
-            <i class="fas fa-chevron-circle-left"></i>
+            <div class="close">
+              <img
+                src="assets/icons/close.svg"
+                alt="fermer la lightbox"
+                onclick="closeLightBox()"
+              />
+            </div>
           </div>
           <div class="lightBoxContent" onclick="displayLightBox()"></div>
         </div>
       </div>
-      <span class="priceLikes">
+      <span
+        class="priceLikes"
+        aria-label="Nombre de likes et prix du photographe à la journée"
+      >
         <span class="totalLikes">0</span>
         <span class="price"></span>
       </span>
     </main>
 
-    <div id="contact_modal">
+    <div id="contact_modal" aria-hidden="true">
       <div class="modalBox">
         <header>
-          <h2 class="titre">Contactez-moi</h2>
+          <div class="identity">
+            <h2 class="titre" aria-label="Formulaire de contact">
+              Contactez-moi
+            </h2>
+            <class class="nom"></class>
+          </div>
           <img
             src="assets/icons/close.svg"
             alt="close"
             onclick="closeModal()"
+            aria-label="Fermer le formulaire de contact"
           />
         </header>
 
@@ -79,7 +106,8 @@
           id="contact"
         >
           <div class="formData">
-            <label for="first">Prénom</label><br />
+            <label for="first" aria-label="saisissez votre prénom">Prénom</label
+            ><br />
             <input
               class="text-control"
               type="text"
@@ -92,7 +120,7 @@
             <span id="prenomManquant"></span>
           </div>
           <div class="formData">
-            <label for="last">Nom</label><br />
+            <label for="last" aria-label="saisissez votre nom">Nom</label><br />
             <input
               class="text-control"
               type="text"
@@ -100,19 +128,23 @@
               name="last"
               minlength="2"
               required
+              aria-label="saisissez votre nom"
             />
             <br />
             <span id="nomManquant"></span>
             <span class="champValide"></span>
           </div>
           <div class="formData">
-            <label for="email">E-mail</label><br />
+            <label for="email" aria-label="saisissez votre e-mail">E-mail</label
+            ><br />
             <input class="text-control" type="email" id="email" name="email" />
             <br />
             <span id="mailManquant"></span>
           </div>
           <div class="formData">
-            <label for="message">Message :</label><br />
+            <label for="message" aria-label="saisissez votre message"
+              >Message :</label
+            ><br />
             <input
               class="text-control"
               type="textarea"
@@ -121,19 +153,27 @@
               placeholder="Saisissez votre message"
               minlength="10"
               required
+              aria-label="saisissez votre message"
             />
             <span id="messageManquant"></span>
             <br />
           </div>
           <div class="formData">
-            <button class="contact_button" type="submit">Envoyer</button>
+            <button
+              class="contact_button"
+              type="submit"
+              value="envoyer"
+              aria-label="Bouton d'envoi du formulaire"
+            >
+              Envoyer
+            </button>
             <span id="alerte"></span>
           </div>
         </form>
       </div>
     </div>
     <script src="scripts/factories/photographer.js"></script>
-    <script src="scripts/pages/photographer.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/pages/photographer.js"></script>
   </body>
 </html>

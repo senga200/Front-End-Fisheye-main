@@ -12,6 +12,8 @@ function closeModal() {
 
 //CONST FORMULAIRE
 const contact = document.querySelector('#contact');
+// const nom = document.querySelector('.nom');
+// nom.innerHTML = photographer.name;
 
 ///////////////////VALIDATION PRENOM///////////////
 
