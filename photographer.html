@@ -46,33 +46,27 @@
           </select>
         </div>
       </section>
-
-      <div class="photograph-gallery">
-        <div id="lightBox_Modal" aria-hidden="true">
-          <div class="icon">
-            <div class="fleches">
-              <div class="precedent">
-                <i
-                  class="fas fa-chevron-left"
-                  aria-label="Image précédente"
-                ></i>
-              </div>
-              <div class="suivant">
-                <i class="fas fa-chevron-right" aria-label="Image suivante"></i>
-              </div>
+      <div id="lightBox_Modal" aria-hidden="true">
+        <div class="icon">
+          <div class="fleches">
+            <div class="precedent">
+              <i class="fas fa-chevron-left" aria-label="Image précédente"></i>
             </div>
-
-            <div class="close">
-              <img
-                src="assets/icons/close.svg"
-                alt="fermer la lightbox"
-                onclick="closeLightBox()"
-              />
+            <div class="suivant">
+              <i class="fas fa-chevron-right" aria-label="Image suivante"></i>
             </div>
           </div>
-          <div class="lightBoxContent" onclick="displayLightBox()"></div>
+          <div class="close">
+            <img
+              src="assets/icons/close.svg"
+              alt="fermer la lightbox"
+              onclick="closeLightBox()"
+            />
+          </div>
         </div>
+        <div class="lightBoxContent" onclick="displayLightBox()"></div>
       </div>
+      <div class="photograph-gallery"></div>
       <span
         class="priceLikes"
         aria-label="Nombre de likes et prix du photographe à la journée"
@@ -92,7 +86,7 @@
             <class class="nom"></class>
           </div>
           <img
-            src="assets/icons/close.svg"
+            src="assets/icons/closeBlanc.svg"
             alt="close"
             onclick="closeModal()"
             aria-label="Fermer le formulaire de contact"

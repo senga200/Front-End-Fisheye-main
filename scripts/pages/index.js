@@ -3,8 +3,8 @@ async function getPhotographer(photographer) {
     const photographerDetail = photographerFactory(photographer);
     const photographerElement = photographerDetail.getUserCardDOM();
     // Ajout de l'élément au conteneur dans l'élément main
-    const main = document.getElementById('main');
-    const photographerSection = main.querySelector('.photographer_section');
+    const main = document.getElementById("main");
+    const photographerSection = main.querySelector(".photographer_section");
     photographerSection.appendChild(photographerElement);
   } catch (error) {
     console.error(error);

@@ -11,7 +11,7 @@ function closeModal() {
 
 
 //CONST FORMULAIRE
-const contact = document.querySelector('#contact');
+const contact = document.querySelector("#contact");
 // const nom = document.querySelector('.nom');
 // nom.innerHTML = photographer.name;
 
@@ -127,25 +127,25 @@ function isValidMessage(){
 
     //////////////////ADDEVENTLISTENER/////////////////////////
 //ecouter la modification du prenom
-contact.first.addEventListener('change', function(){
+contact.first.addEventListener("change", function(){
     isValidFirst(this); 
   });
   //ecouter la modification du prénom
-  contact.last.addEventListener('change', function(){
+  contact.last.addEventListener("change", function(){
     isValidLast (this);
   });
   //ecouter la modification du mail
-  contact.email.addEventListener('change', function(){
+  contact.email.addEventListener("change", function(){
     isValidEmail (this);
   });
   //ecouter la modification du message
-  contact.message.addEventListener('change', function(){
+  contact.message.addEventListener("change", function(){
  isValidMessage(this);
   });
  
 
   //ecouter la soumission du formulaire
-contact.addEventListener('submit', function(e){
+contact.addEventListener("submit", function(e){
     const modalBox = document.querySelector(".modalBox");
     const h2Header = document.querySelector(".titre");
     

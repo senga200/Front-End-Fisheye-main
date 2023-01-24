@@ -1,21 +1,14 @@
 //Mettre le code JavaScript lié à la page photographer.html
 //variables lightbox
-const modalLightBox = document.querySelector('#lightBox_Modal');
-    const content = document.querySelector('.lightBoxContent');
+const modalLightBox = document.querySelector("#lightBox_Modal");
+    const content = document.querySelector(".lightBoxContent");
 //variables slider
-let index = 0;
+let indexCourant = 0;
 let photos=[];
 const suivant = document.querySelector(".suivant");
 const precedent = document.querySelector(".precedent");
 //variables galerie
-const gallery = document.querySelector('.photograph-gallery');
-gallery.style.display="grid";
-gallery.style.gridTemplateColumns = 'repeat(3, 1fr)';
-gallery.style.gridRowGap = '60px';
-gallery.style.columnGap = '110px';
-gallery.style.color= "#901C1C";
-// if (window.innerWidth < 700) {
-//   gallery.style.gridTemplateColumns = '1fr';}
+const gallery = document.querySelector(".photograph-gallery");
 const children = gallery.children;
 
 ////////////////////////////////////////////////
@@ -24,8 +17,8 @@ async function getPhotographerData() {
   try {
     // Récupérer les données du photographe à partir de l ID de l URL
     const params = new URLSearchParams(location.search);
-    const id = params.get('id');
-    const response = await fetch(`http://127.0.0.1:5501/data/photographers.json`);
+    const id = params.get("id");
+    const response = await fetch("http://127.0.0.1:5501/data/photographers.json");
     const data = await response.json();
     const photographer = data.photographers.find(photographer => photographer.id == id);
     // Récupérer les photos du photographe
@@ -52,21 +45,23 @@ async function recupData() {
 }
 ////////////////////////////////////////////////
 // Charger la page et appeler la fonction recupData
-document.addEventListener('DOMContentLoaded', recupData);
+document.addEventListener("DOMContentLoaded", recupData);
+
+
 //ecoute sur le clic 
-suivant.addEventListener('click',() => {
-  if (index >= photos.length) {
-      index = 0;
+suivant.addEventListener("click",() => {
+  if (indexCourant >= photos.length) {
+      indexCourant = 0;
   }
-    index++;
-        displayLightBox(photos, index);
+    indexCourant++;
+        displayLightBox(photos, indexCourant);
 });
-precedent.addEventListener('click', () => {
-  if (index < 0) {
-    index = photos.length - 1;
+precedent.addEventListener("click", () => {
+  if (indexCourant < 0) {
+    indexCourant = photos.length - 1;
   }
-  index--;
-        displayLightBox(photos, index);
+  indexCourant--;
+        displayLightBox(photos, indexCourant);
 });
 //  ecoute sur le clavier /droite/gauche
 document.addEventListener("keydown", (e) => {
@@ -75,7 +70,7 @@ document.addEventListener("keydown", (e) => {
   } else if(e.key === "ArrowRight") {
     suivant.click();
   }
-        displayLightBox(photos, index);
+        displayLightBox(photos, indexCourant);
 });
 //"Echap"
 document.addEventListener("keydown", (e) => {
@@ -91,9 +86,9 @@ function displayMedia() {
   let totalCompteur = 0;
   photos.forEach((photo, index) => {
     //grid : chaque bloc photo de la galerie
-    const grid = document.createElement('div');
+    const grid = document.createElement("div");
     grid.style.cursor ="pointer";
-    const infoPhoto = document.createElement('div');
+    const infoPhoto = document.createElement("div");
     infoPhoto.innerHTML = `<h4>${photo.title}</h4>`;
     infoPhoto.style.display = "flex";
     infoPhoto.style.justifyContent = "space-around";
@@ -104,13 +99,13 @@ function displayMedia() {
     totalCompteur += photo.likes;
     let alreadyClicked = false;
     const blocPriceLikes = document.querySelector(".priceLikes");
-    const totalLikes = document.querySelector('.totalLikes');
+    const totalLikes = document.querySelector(".totalLikes");
     const price = document.querySelector(".price");
     //price.innerHTML = photographerPrice + " € / jour ";
     //premier affichage
     totalLikes.innerHTML = totalCompteur + " ❤ " + photographerPrice + " € / jour ";
     //heart : coeur de la photo
-    const heart = document.createElement('span');
+    const heart = document.createElement("span");
     heart.style.cursor = "pointer";
     heart.innerHTML = "❤" + photo.likes;
     heart.addEventListener("click", function () {
@@ -118,8 +113,8 @@ function displayMedia() {
       if (!alreadyClicked) {
         //ajoute un like à la photo (alreadyClicked = 1fois = true)
         photo.likes++;
-        totalCompteur += 1;
-        totalLikes.innerHTML = totalCompteur + " ❤";
+        totalCompteur ++;
+        totalLikes.innerHTML = totalCompteur + " ❤" + photographerPrice + " € / jour ";
         //price.innerHTML = photographerPrice + " € / jour ";
         heart.innerHTML = "❤" + photo.likes;
         alreadyClicked = true;
@@ -132,7 +127,7 @@ function displayMedia() {
       grid.innerHTML = `<video src="assets/images/${photo.video}" alt="${photo.title}" controls>`;
     }
 //au clic sur un bloc image, ouverture de la lightBox
-    grid.querySelector('img, video').addEventListener('click', () => {
+    grid.querySelector("img, video").addEventListener("click", () => {
       displayLightBox(photos, index);
     });
     gallery.appendChild(grid);
@@ -156,7 +151,7 @@ function displayLightBox(photos, index) {
     url = `assets/images/${photo.video}`;
     content.innerHTML = `<video src="${url}" alt="${photo.title}"controls><h4>${photo.title}</h4>`;
   }
-  modalLightBox.style.display = 'block';
+  modalLightBox.style.display = "block";
 }
 
 function closeLightBox() {
@@ -164,16 +159,17 @@ function closeLightBox() {
 }
 
 function closeLightBox() {
-  const modalLightBox = document.querySelector('#lightBox_Modal');
+  const modalLightBox = document.querySelector("#lightBox_Modal");
   modalLightBox.style.display = "none";
 }
 
 ///////////////TRI//////////////////////
 
 //vider la galerie avant d'afficher la galerie triée cf innerHTML="" ou remove  juste avant de les réafficher
-const select = document.getElementById('selector');
-select.addEventListener('change', () => {
+const select = document.getElementById("selector");
+select.addEventListener("change", () => {
   const selectedOption = select.value;
+  indexCourant =[0];
 
     switch(selectedOption) {
         case "popularite":
@@ -186,7 +182,6 @@ select.addEventListener('change', () => {
             }
             return 0;
           });
-    
             break;
         case "Date":
           photos.sort(function(a, b) {

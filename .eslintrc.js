@@ -9,6 +9,8 @@ module.exports = {
         "ecmaVersion": "latest"
     },
     "rules": { 
-        "eqeqeq" : "warn"
+       // "eqeqeq" : "warn",
+       "quotes": ["warn", "double"],
+       "semi": ["error", "always"]
     }
-}
+};

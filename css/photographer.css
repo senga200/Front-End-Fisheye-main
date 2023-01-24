@@ -1,47 +1,4 @@
-
-
-#contact_modal {
-    display: none;
-    /*background-color: yellow;*/
-    position: fixed;
-    z-index: 1;
-    left: 50px;
-    top: 50px;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-}
-
-#lightBox_Modal{
-    background-color: #fafafad5;
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 50px;
-    top: 0;
-    padding-top: 50px;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-}
-
-.lightBoxContent{
-    background-color: grey;
-    border-radius: 5px;
-   /* width: 50%;*/
-   width: 670px;
-   /*height: 900px;*/
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
-}
-/* 
-.lightBoxContent img{
-    border: solid red;
-} */
+/*PHOTOGRAPHE HEADER*/
 
 .photograph-header {
     background-color: #FAFAFA;
@@ -53,48 +10,26 @@
     width: 200px;
     border-radius: 100px;
 }
-.photograph-header h2{
-  color : #901C1C; 
-}
-
 
 .photograph-header h1{
     width: 150px;
     color: #D3573C;
 }
-
-.filtres {
-    margin-left: 100px;
-    padding-top: 50px;
-    display: flex;
-    flex-direction: row;
+.photograph-header h2{
+  color : #901C1C;
 }
 
-.tri{
-    width: 100px;
-    padding-top: 3px;
-    text-align: center;
-    font-weight: bold;
-}
-
-select{
-    padding: 5px;
-    width: 120px;
-    /*height: 50px;*/
-    border: none;
-    background-color: #901C1C;
-    color : #fff;
-    text-align: center;
-}
-
-.photograph-gallery{
-    margin: 50px;
-}
-
-.photograph-gallery img, video{
-    width: 350px;
-    height: 300px;
-    border-radius: 5px;
+/* MODAL DE CONTACT */
+#contact_modal {
+    background-color:#fafafad5;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 50px;
+    top: 50px;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
 }
 
 .contact_button {
@@ -104,7 +39,7 @@ select{
     padding: 11px;
     width: 170px;
     height: 70px;
-    border: none; 
+    border: none;
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
@@ -113,9 +48,7 @@ select{
 .modalBox {
     border-radius: 5px;
     background-color: #DB8876;
-   width:35%;
-   /*width: 500px;*/
-   /*height: 900px;*/
+    width:35%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -146,17 +79,16 @@ select{
 
 .modalBox header h2 {
     font-size: 45px;
-    font-weight: normal;
-    text-align: center;
+    font-weight: bold;
 }
 form {
     padding-top: 60px;
     display: flex;
-    width: 100%;
-    height: 900px;
+    width: 70%;
+    height: 100%;
     flex-direction: column;
-    /*align-items: flex-start;*/
 }
+
 form label {
     color: #312E2E;
     font-size: 20px;
@@ -170,21 +102,127 @@ form div {
 }
 
 form input {
-    width: 100%;
-    height: 60px;
+    height: 40px;
     border: none;
     border-radius: 5px;
 }
+
 #message{
     min-height: 200px;
- vertical-align : baseline;
+    vertical-align : baseline;
 }
+
+/*MODAL LIGHTBOX*/
+#lightBox_Modal{
+    background-color: #fafafad5;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 50px;
+    top: 0;
+   /* padding-top: 50px;*/
+    height: 100%;
+    width: 100%;
+    /*overflow: auto;*/
+}
+
+.lightBoxContent{
+    color :#901C1C;
+    border-radius: 5px;
+   /* width: 50%;*/
+ /*  width: 670px;*/
+   /*height: 900px;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: auto;
+}
+
+.lightBoxContent img, video{
+    width: 780px;
+    height: 650px;
+}
+.icon {
+    /* border: solid yellow;*/
+     position: absolute;
+     padding-top: 100px;
+     height: 100%;
+     width: 100%;
+     display: flex;
+
+ }
+
+
+.fleches {
+    /* border: solid green;*/
+     display: flex;
+     width: 100%;
+     margin: -250px 170px 0px 200px;
+     justify-content: space-between;
+     align-items: center;
+ }
+ .fleches i{
+     font-size: 40px;
+     color: #901C1C;
+
+ }
+ .icon img{
+     position: relative;
+     right: 200px;
+     cursor: pointer;
+     width: 40px;
+     height: 40px;
+     color :#901C1C;
+ }
+ /*TRI*/
+
+.filtres {
+    margin-left: 100px;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+.tri{
+    width: 100px;
+    padding-top: 3px;
+    text-align: center;
+    font-weight: bold;
+}
+
+select{
+    padding: 5px;
+    width: 120px;
+    /*height: 50px;*/
+    border: none;
+    background-color: #901C1C;
+    color : #fff;
+    text-align: center;
+}
+
+.photograph-gallery{
+    margin: 50px;
+    display: grid;
+    grid-template-columns:repeat(3, 1fr) ;
+    row-gap: 60px;
+    column-gap: 110px;
+    color: #901C1C;
+}
+
+.photograph-gallery img, video{
+    width: 350px;
+    height: 300px;
+    border-radius: 5px;
+}
+
 
 .totalLikes {
     position: fixed;
     z-index: 1;
     bottom: 0;
-    right : 0; 
+    right : 0;
     background-color: #DB8876;
     height: 35px ;
     margin-right: 20px;
@@ -192,44 +230,11 @@ form input {
     border-radius: 5px 5px 0px 0px;
 }
 
-.icon {
-   /* border: solid yellow;*/
-    position: absolute;
-    padding-top: 100px;
-    height: 100%;
-    width: 100%;
-    display: flex; 
-
-}
-
-.fleches {
-   /* border: solid green;*/
-    display: flex;
-    width: 80%;
-    height: 50%;
-    margin: -100px 200px 0px 200px;
-    justify-content: space-around;
-    align-items: center;
-}
-.fleches i{
-    font-size: 40px;
-
-}
-.icon img{
-    position: relative;
-    right: 400px;
-    top: -70px;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    color :#901C1C;
-}
 
 
 @media screen and (max-width :768px) {
-    body{
-        display: flex;
-        flex-direction: column !important;
+    .logo img{
+        margin: auto;
     }
 
     .photograph-header{
@@ -243,11 +248,42 @@ form input {
         width: 100px;
         border-radius: 50px;
     }
+    .photograph-header h1{
+        margin: auto;
+    }
 
     .contact_button {
         font-size: 16px;
         width:auto;
         height: auto;
         margin: 20px;
+    }
+    .photograph-gallery{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #contact_modal{
+   left: 0;
+   background-color: #fafafac7;
+    }
+
+    .modalBox{
+    width: auto;
+    padding-top: 0;
+    margin: 50px;
+    }
+    .modalBox header {
+        display: flex;
+        flex-direction: row;
+        padding-top: 20px;
+    }
+    /* .identity{
+        padding: 0;
+    } */
+
+    .nom{
+        font-size: 30px;
     }
 }
