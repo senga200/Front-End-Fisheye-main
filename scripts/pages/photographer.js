@@ -50,35 +50,42 @@ document.addEventListener("DOMContentLoaded", recupData);
 
 //ecoute sur le clic 
 suivant.addEventListener("click",() => {
-  if (indexCourant >= photos.length) {
+  if (indexCourant >= photos.length - 1) {
       indexCourant = 0;
-  }
+  } else {
     indexCourant++;
-        displayLightBox(photos, indexCourant);
+  }
+  openLightBox(photos, indexCourant);
 });
 precedent.addEventListener("click", () => {
-  if (indexCourant < 0) {
+  if (indexCourant <= 0) {
     indexCourant = photos.length - 1;
+  } else {
+    indexCourant--;
   }
-  indexCourant--;
-        displayLightBox(photos, indexCourant);
+  openLightBox(photos, indexCourant);
 });
 //  ecoute sur le clavier /droite/gauche
 document.addEventListener("keydown", (e) => {
+
   if (e.key === "ArrowLeft") {
     precedent.click();
   } else if(e.key === "ArrowRight") {
     suivant.click();
   }
-        displayLightBox(photos, indexCourant);
-});
+}); 
 //"Echap"
-document.addEventListener("keydown", (e) => {
+modalLightBox.addEventListener("keydown", (e) => {
   if (e.key === "Escape") { 
-        closeLightBox();
+    closeLightBox();
   }
 });
-
+//ENTER 
+modalLightBox.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") { 
+    openLightBox(photos, indexCourant);
+  }
+});
 //////AFFICHAGE DE LA GALERIE = PHOTOS + LIKES///////////
 
 function displayMedia() {
@@ -128,7 +135,7 @@ function displayMedia() {
     }
 //au clic sur un bloc image, ouverture de la lightBox
     grid.querySelector("img, video").addEventListener("click", () => {
-      displayLightBox(photos, index);
+      openLightBox(photos, index);
     });
     gallery.appendChild(grid);
     grid.appendChild(infoPhoto);
@@ -140,7 +147,8 @@ function displayMedia() {
 
 ///////////AFFICHAGE DE LA LIGHTBOX/////////////////////
 const fermer= document.querySelector(".close");
-function displayLightBox(photos, index) {
+
+function openLightBox(photos, index) {
   const photo = photos[index];
   let url;
   if (photo.image) {
@@ -206,7 +214,7 @@ select.addEventListener("change", () => {
           });
           break;
         }
-        while (children.length > 0) {
+        while (children.length > 0) {     
           children[0].remove();
         }
         displayMedia();

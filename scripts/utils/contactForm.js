@@ -167,3 +167,13 @@ h2Header.innerHTML="Merci pour votre message.";
 }});
 
 
+const inputs = contact.querySelectorAll("input,textarea,button");
+inputs.forEach((input) => {
+    input.addEventListener("keydown", (event) => {
+        event.stopPropagation();
+    });
+});
+
+
+
+

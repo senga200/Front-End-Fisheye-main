@@ -140,9 +140,14 @@ form input {
     margin: auto;
 }
 
-.lightBoxContent img, video{
-    width: 780px;
-    height: 650px;
+.lightBoxContent img{
+    width: 73           0px;
+    height: 600px;
+}
+.lightBoxContent video{
+    padding-top: 100px;
+    width: 60%;
+    height: 60%;
 }
 .icon {
     /* border: solid yellow;*/
