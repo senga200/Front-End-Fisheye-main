@@ -34,7 +34,6 @@ function photographerFactory(data) {
 
 function mediaFactory(photographer) {
   // Sélectionner la div photograph-header et styliser
-
   const header = document.querySelector(".photograph-header");
   header.style.display="flex";
   header.style.justifyContent = "space-around";

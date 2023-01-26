@@ -75,19 +75,18 @@ document.addEventListener("keydown", (e) => {
   }
 }); 
 //"Echap"
-modalLightBox.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") { 
     closeLightBox();
   }
 });
 //ENTER 
-modalLightBox.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", (e) => {
   if (e.key === "Enter") { 
     openLightBox(photos, indexCourant);
   }
 });
 //////AFFICHAGE DE LA GALERIE = PHOTOS + LIKES///////////
-
 function displayMedia() {
   //mettre le compteur à 0
   let totalCompteur = 0;
@@ -107,8 +106,6 @@ function displayMedia() {
     let alreadyClicked = false;
     const blocPriceLikes = document.querySelector(".priceLikes");
     const totalLikes = document.querySelector(".totalLikes");
-    const price = document.querySelector(".price");
-    //price.innerHTML = photographerPrice + " € / jour ";
     //premier affichage
     totalLikes.innerHTML = totalCompteur + " ❤ " + photographerPrice + " € / jour ";
     //heart : coeur de la photo
@@ -121,10 +118,9 @@ function displayMedia() {
         //ajoute un like à la photo (alreadyClicked = 1fois = true)
         photo.likes++;
         totalCompteur ++;
-        totalLikes.innerHTML = totalCompteur + " ❤" + photographerPrice + " € / jour ";
-        //price.innerHTML = photographerPrice + " € / jour ";
+        totalLikes.innerHTML = totalCompteur + " ❤ " + photographerPrice + " € / jour ";
         heart.innerHTML = "❤" + photo.likes;
-        alreadyClicked = true;
+        alreadyClicked = true;  
       }
     });
 //ajoute photo ou video dans un bloc image (grid)
@@ -138,9 +134,9 @@ function displayMedia() {
       openLightBox(photos, index);
     });
     gallery.appendChild(grid);
+    grid.setAttribute("tabindex", "1");
     grid.appendChild(infoPhoto);
     infoPhoto.appendChild(heart);
-    blocPriceLikes.appendChild(price);
     blocPriceLikes.appendChild(totalLikes);
   });
 }
@@ -154,10 +150,9 @@ function openLightBox(photos, index) {
   if (photo.image) {
     url = `assets/images/${photo.image}`;
     content.innerHTML = `<img src="${url}" alt="${photo.title}"/><h4>${photo.title}</h4>`;
-    //photo.style.width = "800px";
   } else if (photo.video) {
     url = `assets/images/${photo.video}`;
-    content.innerHTML = `<video src="${url}" alt="${photo.title}"controls><h4>${photo.title}</h4>`;
+    content.innerHTML = `<video src="${url}" alt="${photo.title}" controls></video><h4>${photo.title}</h4>`;
   }
   modalLightBox.style.display = "block";
 }
