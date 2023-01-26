@@ -86,6 +86,8 @@ document.addEventListener("keydown", (e) => {
     openLightBox(photos, indexCourant);
   }
 });
+
+
 //////AFFICHAGE DE LA GALERIE = PHOTOS + LIKES///////////
 function displayMedia() {
   //mettre le compteur à 0
@@ -122,7 +124,20 @@ function displayMedia() {
         heart.innerHTML = "❤" + photo.likes;
         alreadyClicked = true;  
       }
-    });
+    });//ecoute au clavier
+    grid.setAttribute("aria-label","tapez + pour liker");
+    grid.addEventListener("keydown", function(e) {
+      if(e.key === "+") {
+          if (!alreadyClicked) {
+              photo.likes++;
+              totalCompteur ++;
+              totalLikes.innerHTML = totalCompteur + " ❤ " + photographerPrice + " € / jour ";
+              heart.innerHTML = "❤" + photo.likes;
+              alreadyClicked = true;  
+          }
+      }
+  });
+  
 //ajoute photo ou video dans un bloc image (grid)
     if (photo.image) {
       grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" />`;
@@ -217,3 +232,8 @@ select.addEventListener("change", () => {
 
           ////////////////////////////////////////////////
 
+          // likes.addEventListener("keydown",(e) => {
+          //   if(e.key==="+"){
+          //     heart.click();
+          //   }
+          // } );

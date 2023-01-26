@@ -19,6 +19,22 @@
   color : #901C1C;
 }
 
+/*GALERIE*/
+.photograph-gallery{
+    margin: 50px;
+    display: grid;
+    grid-template-columns:repeat(3, 1fr) ;
+    row-gap: 60px;
+    column-gap: 110px;
+    color: #901C1C;
+}
+
+.photograph-gallery img, video{
+    width: 350px;
+    height: 300px;
+    border-radius: 5px;
+}
+
 /* MODAL DE CONTACT */
 #contact_modal {
     background-color:#fafafad5;
@@ -120,18 +136,13 @@ form input {
     z-index: 1;
     left: 50px;
     top: 0;
-   /* padding-top: 50px;*/
     height: 100%;
     width: 100%;
-    /*overflow: auto;*/
 }
 
 .lightBoxContent{
     color :#901C1C;
     border-radius: 5px;
-   /* width: 50%;*/
- /*  width: 670px;*/
-   /*height: 900px;*/
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -141,7 +152,7 @@ form input {
 }
 
 .lightBoxContent img{
-    width: 73           0px;
+    width: 730px;
     height: 600px;
 }
 .lightBoxContent video{
@@ -150,18 +161,14 @@ form input {
     height: 60%;
 }
 .icon {
-    /* border: solid yellow;*/
      position: absolute;
      padding-top: 100px;
      height: 100%;
      width: 100%;
      display: flex;
-
  }
 
-
 .fleches {
-    /* border: solid green;*/
      display: flex;
      width: 100%;
      margin: -250px 170px 0px 200px;
@@ -181,8 +188,8 @@ form input {
      height: 40px;
      color :#901C1C;
  }
- /*TRI*/
 
+ /*TRI*/
 .filtres {
     margin-left: 100px;
     padding-top: 50px;
@@ -200,28 +207,13 @@ form input {
 select{
     padding: 5px;
     width: 120px;
-    /*height: 50px;*/
     border: none;
     background-color: #901C1C;
     color : #fff;
     text-align: center;
 }
 
-.photograph-gallery{
-    margin: 50px;
-    display: grid;
-    grid-template-columns:repeat(3, 1fr) ;
-    row-gap: 60px;
-    column-gap: 110px;
-    color: #901C1C;
-}
-
-.photograph-gallery img, video{
-    width: 350px;
-    height: 300px;
-    border-radius: 5px;
-}
-
+/*LIKES*/
 .totalLikes {
     position: fixed;
     z-index: 1;
@@ -247,11 +239,13 @@ select{
         text-align: center;
         padding: 40px;
     }
+
     .photograph-header img{
         height: 100px;
         width: 100px;
         border-radius: 50px;
     }
+
     .photograph-header h1{
         margin: auto;
     }
@@ -262,6 +256,7 @@ select{
         height: auto;
         margin: 20px;
     }
+    
     .photograph-gallery{
         display: flex;
         flex-direction: column;
@@ -269,23 +264,20 @@ select{
     }
 
     #contact_modal{
-   left: 0;
-   background-color: #fafafac7;
+        left: 0;
+        background-color: #fafafac7;
     }
 
     .modalBox{
-    width: auto;
-    padding-top: 0;
-    margin: 50px;
+        width: auto;
+        padding-top: 0;
+        margin: 50px;
     }
     .modalBox header {
         display: flex;
         flex-direction: row;
         padding-top: 20px;
     }
-    /* .identity{
-        padding: 0;
-    } */
 
     .nom{
         font-size: 30px;
