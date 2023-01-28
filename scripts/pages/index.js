@@ -13,16 +13,16 @@ async function getPhotographer(photographer) {
 
 async function getPhotographers() {
   try {
-    const response = await fetch("http://127.0.0.1:5501/data/photographers.json");
+    const response = await fetch("https://senga200.github.io/Front-End-Fisheye-main/data/photographers.json");
     const data = await response.json();
     data.photographers.forEach(photographer => {
       getPhotographer(photographer);
+      //console.table(data.photographers);
     });
   } catch (error) {
     console.error(error);
   }
 }
-
 getPhotographers(); // Affiche tous les photographes dans le DOM
 
 

@@ -18,7 +18,7 @@ async function getPhotographerData() {
     // Récupérer les données du photographe à partir de l ID de l URL
     const params = new URLSearchParams(location.search);
     const id = params.get("id");
-    const response = await fetch("http://127.0.0.1:5501/data/photographers.json");
+    const response = await fetch("https://senga200.github.io/Front-End-Fisheye-main/data/photographers.json");
     const data = await response.json();
     const photographer = data.photographers.find(photographer => photographer.id == id);
     // Récupérer les photos du photographe
@@ -232,8 +232,3 @@ select.addEventListener("change", () => {
 
           ////////////////////////////////////////////////
 
-          // likes.addEventListener("keydown",(e) => {
-          //   if(e.key==="+"){
-          //     heart.click();
-          //   }
-          // } );
