@@ -228,7 +228,7 @@ select{
 
 
 
-@media screen and (max-width :768px) {
+@media screen and (max-width: 780px) {
     .logo img{
         margin: auto;
     }

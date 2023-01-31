@@ -26,3 +26,4 @@ async function getPhotographers() {
 getPhotographers(); // Affiche tous les photographes dans le DOM
 
 
+ 

@@ -50,8 +50,7 @@ h1 {
     border-radius: 100px;
 }
 
-@media screen and (max-width :768px) {
-
+@media screen and (max-width: 780px) {
     header {
         display: flex;
         flex-direction: column;
