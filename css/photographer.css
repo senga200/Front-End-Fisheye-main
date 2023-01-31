@@ -270,16 +270,53 @@ select{
 
     .modalBox{
         width: auto;
-        padding-top: 0;
-        margin: 50px;
+        padding-top: 30px;
+        margin: 15px;
     }
     .modalBox header {
         display: flex;
         flex-direction: row;
-        padding-top: 20px;
+    }
+
+    .modalBox header h2 {
+        font-size: 32px;
+    }
+    .modalBox header img{
+       width: 30px;
     }
 
     .nom{
         font-size: 30px;
     }
+
+    #lightBox_Modal{
+
+    left: 0;
+   
+    }
+
+    .lightBoxContent{
+        margin-left: -50px;
+    }
+
+    .lightBoxContent img, video{
+        width: 350px;
+        height: 300px;
+        margin-left: 45px;
+    }
+
+    .icon{
+        padding-top: 40px;
+        margin: 15px;
+        height: 300px;
+    }
+    .icon img{
+        right: 50px;
+    }
+
+    .fleches {
+        margin: auto;
+
+    }
+
 }
