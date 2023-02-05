@@ -9,9 +9,9 @@ function photographerFactory(data) {
     article.style.textAlign = "center";
     const link = document.createElement("a");
     link.setAttribute("href", `photographer.html?id=${id}`);
+    const focus = document.createElement("div");
     const img = document.createElement("img");
-    img.setAttribute("src", picture);
-    img.setAttribute("aria-label", `En savoir plus sur ${name}`);
+    img.setAttribute("src", picture, "aria-label", `En savoir plus sur ${name}`);
     const h2 = document.createElement("h2");
     h2.textContent = `${name}`;
     const h3 = document.createElement("h3");
@@ -20,14 +20,16 @@ function photographerFactory(data) {
     p3.textContent = `${tagline}`;
     const p4 = document.createElement("p");
     p4.textContent = `${price}€/jour`;
+    focus.appendChild(img);
+    focus.appendChild(h2);
+    link.appendChild(focus);
     article.appendChild(link);
-    link.appendChild(img);
-    article.appendChild(h2);
     article.appendChild(h3);
     article.appendChild(p3);
     article.appendChild(p4);
     return article;
   }
+  
   return { name, picture, city, country, tagline, price, getUserCardDOM };
 }
 

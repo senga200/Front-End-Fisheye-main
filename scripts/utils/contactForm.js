@@ -8,6 +8,13 @@ function closeModal() {
     modal.style.display = "none";
 }
 
+//"Echap"
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") { 
+    closeModal();
+  }
+});
+
 
 
 //CONST FORMULAIRE
@@ -165,6 +172,8 @@ h2Header.innerHTML="Merci pour votre message.";
  modalBox.style.display="block";  
   contact.style.display = "none";
 }});
+
+
 
 
 const inputs = contact.querySelectorAll("input,textarea,button");

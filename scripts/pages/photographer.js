@@ -16,7 +16,7 @@ let photographerPrice;
 async function getPhotographerData() {
   try {
     // Récupérer les données du photographe à partir de l ID de l URL
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     const response = await fetch("https://senga200.github.io/Front-End-Fisheye-main/data/photographers.json");
     const data = await response.json();
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", recupData);
 
 //ecoute sur le clic 
 suivant.addEventListener("click",() => {
-  if (indexCourant >= photos.length - 1) {
+  if (indexCourant >= photos.length) {
       indexCourant = 0;
   } else {
     indexCourant++;
@@ -59,7 +59,7 @@ suivant.addEventListener("click",() => {
 });
 precedent.addEventListener("click", () => {
   if (indexCourant <= 0) {
-    indexCourant = photos.length - 1;
+    indexCourant = photos.length;
   } else {
     indexCourant--;
   }
@@ -99,7 +99,7 @@ function displayMedia() {
     const infoPhoto = document.createElement("div");
     infoPhoto.innerHTML = `<h4>${photo.title}</h4>`;
     infoPhoto.style.display = "flex";
-    infoPhoto.style.justifyContent = "space-around";
+    infoPhoto.style.justifyContent = "space-between";
     infoPhoto.style.alignItems = "center";
     infoPhoto.style.padding = "0";
     //chq boucle ajoute les likes d'une photo à total compteur
@@ -123,9 +123,16 @@ function displayMedia() {
         totalLikes.innerHTML = totalCompteur + " ❤ " + photographerPrice + " € / jour ";
         heart.innerHTML = "❤" + photo.likes;
         alreadyClicked = true;  
+      }else {
+        //enleve le like à la photo
+        photo.likes--;
+        totalCompteur --;
+        totalLikes.innerHTML = totalCompteur + " ❤ " + photographerPrice + " € / jour ";
+        heart.innerHTML = "❤" + photo.likes;
+        alreadyClicked = false;  
       }
     });//ecoute au clavier
-    grid.setAttribute("aria-label","tapez + pour liker");
+    grid.setAttribute("aria-label","tapez + et - pour liker");
     grid.addEventListener("keydown", function(e) {
       if(e.key === "+") {
           if (!alreadyClicked) {
@@ -135,14 +142,26 @@ function displayMedia() {
               heart.innerHTML = "❤" + photo.likes;
               alreadyClicked = true;  
           }
+      } else if (e.key === "-") {
+        if (alreadyClicked) {
+        photo.likes--;
+        totalCompteur --;
+        totalLikes.innerHTML = totalCompteur + " ❤ " + photographerPrice + " € / jour ";
+        heart.innerHTML = "❤" + photo.likes;
+        alreadyClicked = false;
+        }
       }
-  });
+    });
+  
+  
   
 //ajoute photo ou video dans un bloc image (grid)
     if (photo.image) {
       grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" />`;
     } else if (photo.video) {
       grid.innerHTML = `<video src="assets/images/${photo.video}" alt="${photo.title}" controls>`;
+    } else{
+      grid.innerHTML ="media non disponible";
     }
 //au clic sur un bloc image, ouverture de la lightBox
     grid.querySelector("img, video").addEventListener("click", () => {
@@ -176,59 +195,103 @@ function closeLightBox() {
   modalLightBox.style.display = "none";
 }
 
-function closeLightBox() {
-  const modalLightBox = document.querySelector("#lightBox_Modal");
-  modalLightBox.style.display = "none";
-}
-
 ///////////////TRI//////////////////////
 
 //vider la galerie avant d'afficher la galerie triée cf innerHTML="" ou remove  juste avant de les réafficher
-const select = document.getElementById("selector");
-select.addEventListener("change", () => {
-  const selectedOption = select.value;
-  indexCourant =[0];
+// const select = document.getElementById("selector");
+// select.addEventListener("change", () => {
+//   const selectedOption = select.value;
+//   indexCourant =[0];
+
+//     switch(selectedOption) {
+//         case "popularite":
+//           photos.sort(function(a, b) {
+//             if (a.likes < b.likes) {
+//               return 1;
+//             }
+//             if (a.likes > b.likes) {
+//               return -1;
+//             }
+//             return 0;
+//           });
+//             break;
+//         case "Date":
+//           photos.sort(function(a, b) {
+//             if (a.date < b.date) {
+//               return -1;
+//             }
+//             if (a.date > b.date) {
+//               return 1;
+//             }
+//             return 0;
+//           });
+//             break;
+//         case "Titre":
+//           photos.sort(function(a, b) {
+//             if (a.title < b.title) {
+//               return -1;
+//             }
+//             if (a.title > b.title) {
+//               return 1;
+//             }
+//             return 0;
+//           });
+//           break;
+//         }
+//         while (children.length > 0) {     
+//           children[0].remove();
+//         }
+//         displayMedia();
+//           });
+
+const select = document.getElementById("select");
+select.addEventListener("click", (e) => {
+  if (e.target.classList.contains("tri-item")) {
+    const selectedOption = e.target.dataset.value;
+    indexCourant =[0];
 
     switch(selectedOption) {
-        case "popularite":
-          photos.sort(function(a, b) {
-            if (a.likes < b.likes) {
-              return 1;
-            }
-            if (a.likes > b.likes) {
-              return -1;
-            }
-            return 0;
-          });
-            break;
-        case "Date":
-          photos.sort(function(a, b) {
-            if (a.date < b.date) {
-              return -1;
-            }
-            if (a.date > b.date) {
-              return 1;
-            }
-            return 0;
-          });
-            break;
-        case "Titre":
-          photos.sort(function(a, b) {
-            if (a.title < b.title) {
-              return -1;
-            }
-            if (a.title > b.title) {
-              return 1;
-            }
-            return 0;
-          });
-          break;
-        }
-        while (children.length > 0) {     
-          children[0].remove();
-        }
-        displayMedia();
-          });
+      case "popularite":
+        photos.sort(function(a, b) {
+          if (a.likes < b.likes) {
+            return 1;
+          }
+          if (a.likes > b.likes) {
+            return -1;
+          }
+          return 0;
+        });
+        break;
+      case "Date":
+        photos.sort(function(a, b) {
+          if (a.date < b.date) {
+            return -1;
+          }
+          if (a.date > b.date) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case "Titre":
+        photos.sort(function(a, b) {
+          if (a.title < b.title) {
+            return -1;
+          }
+          if (a.title > b.title) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      }
+    while (children.length > 0) {     
+      children[0].remove();
+    }
+    displayMedia();
+  }
+});
+
 
           ////////////////////////////////////////////////
 

@@ -21,17 +21,23 @@
 
 /*GALERIE*/
 .photograph-gallery{
-    margin: 50px;
+    margin: 100px;
     display: grid;
     grid-template-columns:repeat(3, 1fr) ;
     row-gap: 60px;
-    column-gap: 110px;
+    column-gap: 130px;
     color: #901C1C;
 }
 
-.photograph-gallery img, video{
+.photograph-gallery img{
     width: 350px;
     height: 300px;
+    border-radius: 5px;
+}
+.photograph-gallery video{
+    width: 350px;
+    height: 300px;
+    object-fit: cover;
     border-radius: 5px;
 }
 
@@ -189,29 +195,59 @@ form input {
      color :#901C1C;
  }
 
+
+
  /*TRI*/
-.filtres {
+ .filtres {
+    width: 400px;
     margin-left: 100px;
-    padding-top: 50px;
+    margin-top: 30px;
+    list-style : none;
     display: flex;
-    flex-direction: row;
+ }
+
+li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+li .fas{
+    margin-left: 50px;
 }
 
 .tri{
-    width: 100px;
-    padding-top: 3px;
     text-align: center;
+    padding-top: 20px;
     font-weight: bold;
+    background-color: #fff;
 }
 
-select{
-    padding: 5px;
-    width: 120px;
-    border: none;
-    background-color: #901C1C;
-    color : #fff;
-    text-align: center;
+#select {
+    width: auto;
 }
+
+.tri-item { 
+    padding: 10px;
+    color: #FAFAFA;
+    background-color: #901C1C;
+    width: 146px;
+    border-bottom : #FAFAFA solid 1px;
+}
+
+.tri-item:hover{
+    background-color: #D3573C;
+    cursor: pointer;
+}
+      
+#select li:not(#pop) {
+    display: none;
+}
+      
+#select:hover li:not(#pop) {
+    display: block;
+}
+      
 
 /*LIKES*/
 .totalLikes {

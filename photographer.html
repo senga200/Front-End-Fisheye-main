@@ -37,16 +37,20 @@
           Contactez-moi
         </button>
       </div>
+
       <section class="filtres" aria-label="Filtres de tri">
         <label class="tri">Trier par </label>
-        <div class="dropdown">
-          <select id="selector">
-            <option value="popularite">Popularité</option>
-            <option value="Date">Date</option>
-            <option value="Titre">Titre</option>
-          </select>
-        </div>
+        <li>
+          <ul id="select">
+            <li class="tri-item" id="pop" data-value="popularite">
+              Popularité <i class="fas fa-solid fa-chevron-down"></i>
+            </li>
+            <li class="tri-item" data-value="Date">Date</li>
+            <li class="tri-item" data-value="Titre">Titre</li>
+          </ul>
+        </li>
       </section>
+
       <div id="lightBox_Modal" aria-hidden="true">
         <div class="icon">
           <div class="fleches">
