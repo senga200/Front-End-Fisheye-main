@@ -20,6 +20,7 @@ function photographerFactory(data) {
     p3.textContent = `${tagline}`;
     const p4 = document.createElement("p");
     p4.textContent = `${price}€/jour`;
+    p4.style.color = "#757575"; 
     focus.appendChild(img);
     focus.appendChild(h2);
     link.appendChild(focus);

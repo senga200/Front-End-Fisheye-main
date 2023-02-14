@@ -128,6 +128,7 @@ form input {
     border: none;
     border-radius: 5px;
 }
+     
 
 #message{
     min-height: 200px;
@@ -227,6 +228,7 @@ li .fas{
     width: auto;
 }
 
+
 .tri-item { 
     padding: 10px;
     color: #FAFAFA;
@@ -239,17 +241,13 @@ li .fas{
     background-color: #D3573C;
     cursor: pointer;
 }
-      
-#select li:not(#pop) {
-    display: none;
-}
-      
-#select:hover li:not(#pop) {
-    display: block;
-}
-      
 
-/*LIKES*/
+#titre,
+#date {
+  display: none;
+}
+
+    /*LIKES*/
 .totalLikes {
     position: fixed;
     z-index: 1;

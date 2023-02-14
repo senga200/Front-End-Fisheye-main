@@ -3,6 +3,7 @@ function displayModal() {
 	modal.style.display = "block";
 }
 
+
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
@@ -11,6 +12,15 @@ function closeModal() {
 //"Echap"
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") { 
+    closeModal();
+  }
+});
+
+
+fermer = document.querySelector(".closeModal");
+fermer.addEventListener("keydown", (e) => {  
+  e.stopPropagation();
+  if (e.key === "Enter") {
     closeModal();
   }
 });
@@ -176,6 +186,14 @@ h2Header.innerHTML="Merci pour votre message.";
 
 
 
+// const inputs = contact.querySelectorAll("input,textarea,button");
+// inputs.forEach((input) => {
+//     input.addEventListener("keydown", (event) => {
+//         event.stopPropagation();
+//     });
+// });
+
+//stop propagation pour que les tabulations ne fonctionnent uniquement sur le formulaire lorsqu'il est ouvert
 const inputs = contact.querySelectorAll("input,textarea,button");
 inputs.forEach((input) => {
     input.addEventListener("keydown", (event) => {

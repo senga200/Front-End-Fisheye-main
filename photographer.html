@@ -31,6 +31,7 @@
       <div class="photograph-header">
         <button
           class="contact_button"
+          tabindex="0";
           aria-label="Ouvrir le formulaire de contact"
           onclick="displayModal()"
         >
@@ -39,16 +40,16 @@
       </div>
 
       <section class="filtres" aria-label="Filtres de tri">
-        <label class="tri">Trier par </label>
-        <li>
-          <ul id="select">
-            <li class="tri-item" id="pop" data-value="popularite">
-              Popularité <i class="fas fa-solid fa-chevron-down"></i>
+        <label for="select" class="tri">Trier par </label>
+        <div>
+          <ul id="select" tabindex="0">
+            <li class="tri-item" id="pop" data-value="popularite" tabindex="1">
+              Popularité <span id="chevron"><i class="fas fa-solid fa-chevron-down"></i></span></i>
             </li>
-            <li class="tri-item" data-value="Date">Date</li>
-            <li class="tri-item" data-value="Titre">Titre</li>
+            <li class="tri-item" id="date" data-value="Date" tabindex="1">Date</li>
+            <li class="tri-item" id ="titre" data-value="Titre" tabindex="1">Titre</li>
           </ul>
-        </li>
+        </div>
       </section>
 
       <div id="lightBox_Modal" aria-hidden="true">
@@ -93,6 +94,8 @@
           <img
             src="assets/icons/closeBlanc.svg"
             alt="close"
+            tabindex="0"
+            class="closeModal"
             onclick="closeModal()"
             aria-label="Fermer le formulaire de contact"
           />
@@ -112,6 +115,7 @@
               type="text"
               id="first"
               name="first"
+              tabindex="0"
               minlength="2"
               required
             />

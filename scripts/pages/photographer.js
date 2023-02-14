@@ -67,7 +67,7 @@ precedent.addEventListener("click", () => {
 });
 //  ecoute sur le clavier /droite/gauche
 document.addEventListener("keydown", (e) => {
-
+e.stopPropagation();
   if (e.key === "ArrowLeft") {
     precedent.click();
   } else if(e.key === "ArrowRight") {
@@ -76,12 +76,14 @@ document.addEventListener("keydown", (e) => {
 }); 
 //"Echap"
 document.addEventListener("keydown", (e) => {
+  e.stopPropagation();
   if (e.key === "Escape") { 
     closeLightBox();
   }
 });
 //ENTER 
 document.addEventListener("keydown", (e) => {
+  e.stopPropagation();
   if (e.key === "Enter") { 
     openLightBox(photos, indexCourant);
   }
@@ -152,9 +154,6 @@ function displayMedia() {
         }
       }
     });
-  
-  
-  
 //ajoute photo ou video dans un bloc image (grid)
     if (photo.image) {
       grid.innerHTML = `<img src="assets/images/${photo.image}" alt="${photo.title}" />`;
@@ -168,7 +167,7 @@ function displayMedia() {
       openLightBox(photos, index);
     });
     gallery.appendChild(grid);
-    grid.setAttribute("tabindex", "1");
+    grid.setAttribute("tabindex", "2");
     grid.appendChild(infoPhoto);
     infoPhoto.appendChild(heart);
     blocPriceLikes.appendChild(totalLikes);
@@ -195,56 +194,47 @@ function closeLightBox() {
   modalLightBox.style.display = "none";
 }
 
-///////////////TRI//////////////////////
 
-//vider la galerie avant d'afficher la galerie triée cf innerHTML="" ou remove  juste avant de les réafficher
-// const select = document.getElementById("selector");
-// select.addEventListener("change", () => {
-//   const selectedOption = select.value;
-//   indexCourant =[0];
 
-//     switch(selectedOption) {
-//         case "popularite":
-//           photos.sort(function(a, b) {
-//             if (a.likes < b.likes) {
-//               return 1;
-//             }
-//             if (a.likes > b.likes) {
-//               return -1;
-//             }
-//             return 0;
-//           });
-//             break;
-//         case "Date":
-//           photos.sort(function(a, b) {
-//             if (a.date < b.date) {
-//               return -1;
-//             }
-//             if (a.date > b.date) {
-//               return 1;
-//             }
-//             return 0;
-//           });
-//             break;
-//         case "Titre":
-//           photos.sort(function(a, b) {
-//             if (a.title < b.title) {
-//               return -1;
-//             }
-//             if (a.title > b.title) {
-//               return 1;
-//             }
-//             return 0;
-//           });
-//           break;
-//         }
-//         while (children.length > 0) {     
-//           children[0].remove();
-//         }
-//         displayMedia();
-//           });
+///////////////TRI AU CLIC//////////////////////
 
-const select = document.getElementById("select");
+ const select = document.getElementById("select");
+ const options = select.querySelectorAll(".tri-item");
+ const title = document.querySelector("#titre");
+const date = document.querySelector("#date");
+
+//*******Apparition/disparition du menu de tri au clic*********//
+let isShown = false;
+
+select.addEventListener("click", function() {
+  if (!isShown) {
+    title.style.display = "inline-block";
+    date.style.display = "inline-block";
+    isShown = true;
+  } else {
+    title.style.display = "none";
+    date.style.display = "none";
+    isShown = false;
+  }
+});
+//*******Apparition/disparition du menu de tri au clavier*********//
+select.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    title.style.display = "inline-block";
+    date.style.display = "inline-block";
+    e.stopPropagation();
+  }
+});
+
+select.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    title.style.display = "none";
+    date.style.display = "none";
+    e.stopPropagation();
+  }
+});
+
+//**********TRI AU CLIC************//
 select.addEventListener("click", (e) => {
   if (e.target.classList.contains("tri-item")) {
     const selectedOption = e.target.dataset.value;
@@ -288,10 +278,57 @@ select.addEventListener("click", (e) => {
     while (children.length > 0) {     
       children[0].remove();
     }
+
     displayMedia();
   }
 });
 
+//**********TRI AU CLAVIER************//
+options.forEach(option => option.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    const selectedOption = option.dataset.value;
+    indexCourant =[0];
 
-          ////////////////////////////////////////////////
+    switch(selectedOption) {
+      case "popularite":
+        photos.sort(function(a, b) {
+          if (a.likes < b.likes) {
+            return 1;
+          }
+          if (a.likes > b.likes) {
+            return -1;
+          }
+          return 0;
+        });
+        break;
+      case "Date":
+        photos.sort(function(a, b) {
+          if (a.date < b.date) {
+            return -1;
+          }
+          if (a.date > b.date) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case "Titre":
+        photos.sort(function(a, b) {
+          if (a.title < b.title) {
+            return -1;
+          }
+          if (a.title > b.title) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+    }
+    while (children.length > 0) {     
+      children[0].remove();
+    }
+    displayMedia();
+  }
+}));
+
 
