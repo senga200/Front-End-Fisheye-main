@@ -1,6 +1,4 @@
-# Base de code du projet P6 - Parcours Front-end
-
-## Démarrer le projet
-
-Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.
+CATALOGUE DE PHOTOGRAPHE ACCESSIBLE
+Lien de la page GitHub :
+https://senga200.github.io/Front-End-Fisheye-main/
 
